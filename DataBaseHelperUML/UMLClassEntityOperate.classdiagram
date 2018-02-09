@@ -30,6 +30,20 @@
         <interfaceMoniker Id="d777e121-ad61-424e-bfc4-d7e59cc64174" LastKnownName="IPageQuery" />
       </annotatedElements>
     </comment>
+    <comment Id="5d3a3a21-6787-47be-95e0-c7d1a9eb8ff6">
+      <elementDefinition Id="77a63256-0b35-420d-bbad-3a8e66b6c6da" />
+      <body>实体映射MapHelper类接口</body>
+      <annotatedElements>
+        <interfaceMoniker Id="e4f7a1b2-77da-4e63-bece-4bbd630084a8" LastKnownName="IMapHelper" />
+      </annotatedElements>
+    </comment>
+    <comment Id="925313b1-4bfd-41dd-ad8b-db3c63f75d2e">
+      <elementDefinition Id="ceec8fc6-c0d0-4dd1-bdbe-d1b9d5403813" />
+      <body>DbHelper类接口</body>
+      <annotatedElements>
+        <interfaceMoniker Id="b73ebb04-b59e-46ae-9eb5-8ebdbe069b84" LastKnownName="IDbHelper" />
+      </annotatedElements>
+    </comment>
   </ownedCommentsInternal>
   <appliedStereotypesInternal>
     <stereotypeInstance Id="c99f789e-c22e-492e-8717-d636c1fcffd2" name="namespace" profile="CSharpProfile">
@@ -168,6 +182,16 @@
     <logicalClassDesignerModelHasTypes>
       <Interface Id="be9b9dbc-2f9c-4a62-a472-8db1e1e2ffa6" name="IOperate" isAbstract="false" isLeaf="false">
         <elementDefinition Id="acc3eb97-a787-497b-b366-4e8aeae1a8d6" />
+        <generalsInternal>
+          <generalization Id="6eb93de6-ff24-41be-b01d-9d31d881745b" isSubstitutable="false">
+            <interfaceMoniker Id="b73ebb04-b59e-46ae-9eb5-8ebdbe069b84" LastKnownName="IDbHelper" />
+            <elementDefinition Id="2ffd39db-8570-49d4-90cc-7190f6c8b896" />
+          </generalization>
+          <generalization Id="472def01-32b7-48cb-9cec-78fce2d24fa1" isSubstitutable="false">
+            <interfaceMoniker Id="e4f7a1b2-77da-4e63-bece-4bbd630084a8" LastKnownName="IMapHelper" />
+            <elementDefinition Id="f2ad0895-105d-41d4-bce4-fbbaa2ac1ca6" />
+          </generalization>
+        </generalsInternal>
         <ownedAttributes>
           <property Id="70e78637-ae45-449a-ae27-2baca76ccabb" name="db" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="6961a98f-2588-4665-b64e-8f3bafbab891" />
@@ -513,6 +537,16 @@
     <logicalClassDesignerModelHasTypes>
       <Interface Id="d777e121-ad61-424e-bfc4-d7e59cc64174" name="IPageQuery" isAbstract="false" isLeaf="false">
         <elementDefinition Id="fd481f83-a456-41d0-a268-d39aa746e55a" />
+        <generalsInternal>
+          <generalization Id="4119ab54-1fe0-4504-9b84-5947deeba25c" isSubstitutable="false">
+            <interfaceMoniker Id="b73ebb04-b59e-46ae-9eb5-8ebdbe069b84" LastKnownName="IDbHelper" />
+            <elementDefinition Id="a272fac2-b122-4f95-970f-0889fe5594b6" />
+          </generalization>
+          <generalization Id="e5a308e5-95a8-4bb1-a21f-68e7b1390184" isSubstitutable="false">
+            <interfaceMoniker Id="e4f7a1b2-77da-4e63-bece-4bbd630084a8" LastKnownName="IMapHelper" />
+            <elementDefinition Id="2ebbe5bf-fc5e-49c9-8d32-2686871a9ce1" />
+          </generalization>
+        </generalsInternal>
         <ownedAttributes>
           <property Id="6370f2a4-cf4d-467a-a150-9f52aaeec041" name="db" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="66c3ad5d-3a8b-4102-9eeb-b37284d24911" />
@@ -816,6 +850,37 @@
     <packageHasNamedElement>
       <referencedType Id="5cf9f7dc-c5dd-481a-bd7c-6852bcf4937c" name="DbHelper" isAbstract="false" isLeaf="false" cachedFullName="DataBaseHelperUML::DbHelper">
         <elementDefinition Id="8cfac440-5e9f-427a-a1e4-19813df2372b" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="b73ebb04-b59e-46ae-9eb5-8ebdbe069b84" name="IDbHelper" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="c06ae795-2849-4746-a035-05dbbc00448a" />
+        <ownedAttributes>
+          <property Id="76a2411f-f6ef-45de-bd3b-f1b0bd56f763" name="db" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a3d2d411-dbd2-4177-bead-c1d03bbcdce4" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="794350e4-1f38-4e50-83a1-b90812277614" LastKnownName="DbHelper" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributes>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="e4f7a1b2-77da-4e63-bece-4bbd630084a8" name="IMapHelper" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="71e7bb8d-152e-4ec0-b9bc-803c30ee2cb7" />
+        <ownedAttributes>
+          <property Id="c4d52275-1fbd-40f4-a676-c00bff41d2e3" name="map" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="b91015c7-f04f-42fa-a608-1aaefd2a986b" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="8ed5a729-c8e8-4383-872f-e591db6d22ed" LastKnownName="MapHelper" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributes>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="8ed5a729-c8e8-4383-872f-e591db6d22ed" name="MapHelper" isAbstract="false" isLeaf="false" cachedFullName="DataBaseHelperUML::MapHelper">
+        <elementDefinition Id="e766dd33-3c34-4966-8284-55b17bbf0287" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>

@@ -31,14 +31,14 @@
     </comment>
     <comment Id="faeda449-3285-421d-98a6-31827958de0c">
       <elementDefinition Id="a4dd7864-2cf3-4f1c-8e19-ff3c280cf55d" />
-      <body>DbHelper类的接口封装</body>
+      <body>DbHelper类的接口</body>
       <annotatedElements>
         <interfaceMoniker Id="66d4db41-34de-40bf-805b-5a16697089ee" LastKnownName="IDbHelper" />
       </annotatedElements>
     </comment>
     <comment Id="0da493f6-e5ab-40a4-ab5f-38a1fd9a55f5">
       <elementDefinition Id="b354f91f-0250-440f-a777-1b9872d155c1" />
-      <body>MapHelper类的接口封装</body>
+      <body>实体映射MapHelper类的接口</body>
       <annotatedElements>
         <interfaceMoniker Id="8c8f3004-2e31-4d99-859e-7f1de2cea078" LastKnownName="IMapHelper" />
       </annotatedElements>

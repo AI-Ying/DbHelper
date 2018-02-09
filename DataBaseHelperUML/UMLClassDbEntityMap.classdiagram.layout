@@ -165,11 +165,11 @@
         <interfaceShapeMoniker Id="40aa4b9b-0185-4ff6-8824-426b453d9b26" />
       </nodes>
     </commentConnector>
-    <commentShape Id="0f1e2b14-48f4-4213-a0a0-30cd85e00743" absoluteBounds="15.875, 6.125, 1.25, 0.5" customColor="251, 247, 200">
+    <commentShape Id="0f1e2b14-48f4-4213-a0a0-30cd85e00743" absoluteBounds="15.875, 6.125, 1.25, 0.625" customColor="251, 247, 200">
       <commentMoniker Id="0da493f6-e5ab-40a4-ab5f-38a1fd9a55f5" />
       <relativeChildShapes />
     </commentShape>
-    <commentConnector edgePoints="[(15.875 : 6.375); (15.125 : 7.101318359375)]" fixedFrom="NotFixed" fixedTo="NotFixed" TargetRelationshipDomainClassId="217d6bd0-42ed-4e7f-ad2b-af3ef5142428" customColor="Black">
+    <commentConnector edgePoints="[(15.875 : 6.4375); (15.125 : 7.101318359375)]" fixedFrom="NotFixed" fixedTo="NotFixed" TargetRelationshipDomainClassId="217d6bd0-42ed-4e7f-ad2b-af3ef5142428" customColor="Black">
       <relativeChildShapes />
       <nodes>
         <commentShapeMoniker Id="0f1e2b14-48f4-4213-a0a0-30cd85e00743" />

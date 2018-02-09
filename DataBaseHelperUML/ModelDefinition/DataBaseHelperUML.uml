@@ -97,7 +97,7 @@
     </comment>
     <comment
       Id="a4dd7864-2cf3-4f1c-8e19-ff3c280cf55d">
-      <body>DbHelper类的接口封装</body>
+      <body>DbHelper类的接口</body>
       <annotatedElements>
         <interfaceMoniker
           Id="c8f4e63f-2262-4581-86b4-d6b7a80f710a"
@@ -107,11 +107,31 @@
     </comment>
     <comment
       Id="b354f91f-0250-440f-a777-1b9872d155c1">
-      <body>MapHelper类的接口封装</body>
+      <body>实体映射MapHelper类的接口</body>
       <annotatedElements>
         <interfaceMoniker
           Id="9fc7af67-89fa-4fab-bf3e-8b4c6e16fa55"
           LastKnownName="IMapHelper"
+          LastKnownLocation="DataBaseHelperUML.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="77a63256-0b35-420d-bbad-3a8e66b6c6da">
+      <body>实体映射MapHelper类接口</body>
+      <annotatedElements>
+        <interfaceMoniker
+          Id="71e7bb8d-152e-4ec0-b9bc-803c30ee2cb7"
+          LastKnownName="IMapHelper"
+          LastKnownLocation="DataBaseHelperUML.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="ceec8fc6-c0d0-4dd1-bdbe-d1b9d5403813">
+      <body>DbHelper类接口</body>
+      <annotatedElements>
+        <interfaceMoniker
+          Id="c06ae795-2849-4746-a035-05dbbc00448a"
+          LastKnownName="IDbHelper"
           LastKnownLocation="DataBaseHelperUML.uml" />
       </annotatedElements>
     </comment>
@@ -6783,7 +6803,7 @@
         </appliedStereotypesInternal>
         <suppliersInternal>
           <interfaceRealization
-            Id="b5cc6405-b0f1-4640-9066-fece83a0906a">
+            Id="ed288628-c17c-4fab-9361-75f28a7135ae">
             <interfaceMoniker
               Id="62eb20d6-f021-4cf3-bb7d-8da014afe861"
               LastKnownName="IDisposable"
@@ -13734,6 +13754,24 @@
         name="IOperate"
         isAbstract="false"
         isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="2ffd39db-8570-49d4-90cc-7190f6c8b896"
+            isSubstitutable="false">
+            <interfaceMoniker
+              Id="c06ae795-2849-4746-a035-05dbbc00448a"
+              LastKnownName="IDbHelper"
+              LastKnownLocation="DataBaseHelperUML.uml" />
+          </generalization>
+          <generalization
+            Id="f2ad0895-105d-41d4-bce4-fbbaa2ac1ca6"
+            isSubstitutable="false">
+            <interfaceMoniker
+              Id="71e7bb8d-152e-4ec0-b9bc-803c30ee2cb7"
+              LastKnownName="IMapHelper"
+              LastKnownLocation="DataBaseHelperUML.uml" />
+          </generalization>
+        </generalsInternal>
         <ownedAttributes>
           <property
             Id="6961a98f-2588-4665-b64e-8f3bafbab891"
@@ -14376,6 +14414,24 @@
         name="IPageQuery"
         isAbstract="false"
         isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="a272fac2-b122-4f95-970f-0889fe5594b6"
+            isSubstitutable="false">
+            <interfaceMoniker
+              Id="c06ae795-2849-4746-a035-05dbbc00448a"
+              LastKnownName="IDbHelper"
+              LastKnownLocation="DataBaseHelperUML.uml" />
+          </generalization>
+          <generalization
+            Id="2ebbe5bf-fc5e-49c9-8d32-2686871a9ce1"
+            isSubstitutable="false">
+            <interfaceMoniker
+              Id="71e7bb8d-152e-4ec0-b9bc-803c30ee2cb7"
+              LastKnownName="IMapHelper"
+              LastKnownLocation="DataBaseHelperUML.uml" />
+          </generalization>
+        </generalsInternal>
         <ownedAttributes>
           <property
             Id="66c3ad5d-3a8b-4102-9eeb-b37284d24911"
@@ -15448,6 +15504,62 @@
         <ownedAttributes>
           <property
             Id="efe3e4db-970e-44fb-9346-3804d138371f"
+            name="map"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="e766dd33-3c34-4966-8284-55b17bbf0287"
+                LastKnownName="MapHelper"
+                LastKnownLocation="DataBaseHelperUML.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributes>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="c06ae795-2849-4746-a035-05dbbc00448a"
+        name="IDbHelper"
+        isAbstract="false"
+        isLeaf="false">
+        <ownedAttributes>
+          <property
+            Id="a3d2d411-dbd2-4177-bead-c1d03bbcdce4"
+            name="db"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="8cfac440-5e9f-427a-a1e4-19813df2372b"
+                LastKnownName="DbHelper"
+                LastKnownLocation="DataBaseHelperUML.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributes>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="71e7bb8d-152e-4ec0-b9bc-803c30ee2cb7"
+        name="IMapHelper"
+        isAbstract="false"
+        isLeaf="false">
+        <ownedAttributes>
+          <property
+            Id="b91015c7-f04f-42fa-a608-1aaefd2a986b"
             name="map"
             isLeaf="false"
             isStatic="false"
