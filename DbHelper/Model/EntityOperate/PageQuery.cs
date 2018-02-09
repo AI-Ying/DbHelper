@@ -6,14 +6,13 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using DataBaseHelper.Helper;
-using DataBaseHelper.Map;
+using DataBaseHelper;
 
-namespace DataBaseHelper.EntityOperate
+namespace DataBaseHelper
 {
-    public class PageQuyeyMaxTop : IPageQuery
+    class PageQuyeyMaxTop : IPageQuery
     {
-        public DbEntityMap ado { get { return new DbEntityMap(); } set { } }
+        public MapHelper map { get { return new MapHelper(); } set { } }
         public DbHelper db { get { return new DbHelper(); } set { } }
         /// <summary>
         /// 分页查询所需的主键
@@ -64,7 +63,7 @@ namespace DataBaseHelper.EntityOperate
             List<DbParameter> paramList = new List<DbParameter>();
             foreach (var p in proInfo)
             {
-                var properAttribute = ado.GetFieldAttribute(p);
+                var properAttribute = map.GetFieldAttribute(p);
                 if (p.GetValue(entity, null) != null)
                 {
                     fieldString.Append($"{properAttribute.FieldName}=@{properAttribute.FieldName} and ");
@@ -83,9 +82,9 @@ namespace DataBaseHelper.EntityOperate
         {
             try
             {
-                string tableName = ado.GetTableName(entity.GetType());
+                string tableName = map.GetTableName(entity.GetType());
                 string sql = string.Empty;
-                DbParameter[] param = ado.GetParameters(entity);
+                DbParameter[] param = map.GetParameters(entity);
                 string where = QueryPrerequisite(entity);
                 int dataCount = GetDataCount(tableName, param, where);
                 if (dataCount > PageSize)
@@ -144,7 +143,7 @@ namespace DataBaseHelper.EntityOperate
             T entity = new T();
             StringBuilder tableNameString = new StringBuilder();
             List<DbParameter> paramList = new List<DbParameter>();
-            var properAttribute = ado.GetTableAttribute(entity.GetType());
+            var properAttribute = map.GetTableAttribute(entity.GetType());
             tableNameString.Append($"{properAttribute.TableName}");
             string tableName = tableNameString.ToString();
             return tableName;
@@ -180,7 +179,7 @@ namespace DataBaseHelper.EntityOperate
                 T entity = new T();
                 string tableName = GetTableNameParameter<T>();
                 string sql = string.Empty;
-                DbParameter[] param = ado.GetTableParameters<T>();
+                DbParameter[] param = map.GetTableParameters<T>();
                 int dataCount = GetDataCount(tableName, param);
                 if (dataCount > PageSize)
                 {

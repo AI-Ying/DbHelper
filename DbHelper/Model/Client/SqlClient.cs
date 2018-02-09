@@ -12,8 +12,8 @@ namespace DataBaseHelper
 {
     public class SqlClient
     {
-        public DBHelper db { get { return new DBHelper(); } set { } }
-        public Ado ado { get { return new Ado(); } set { } }
+        public DbHelper db { get { return new DbHelper(); } set { } }
+        public MapHelper map { get { return new MapHelper(); } set { } }
         public enum Sql
         {
             select,
@@ -64,17 +64,17 @@ namespace DataBaseHelper
                 throw new Exception();
             }  
         }
-        public ExecuteToDataTable(string sql, CommandType cmdType, DbParameter[] param, out object obj)
-        {
-            try
-            {
+        //public void ExecuteToDataTable(string sql, CommandType cmdType, DbParameter[] param, out object obj)
+        //{
+        //    try
+        //    {
+        //        DataTable dt = new DataTable();
+        //    }
+        //    catch (Exception e)
+        //    {
 
-            }
-            catch (Exception e)
-            {
-
-                throw;
-            }
-        }
+        //        throw;
+        //    }
+        //}
     }
 }

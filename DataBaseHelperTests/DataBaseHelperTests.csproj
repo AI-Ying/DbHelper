@@ -53,9 +53,14 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Model\Client\SqlClientTests.cs" />
+    <Compile Include="Model\Map\DbEntityMapTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DbHelperTests\DbHelperTests.csproj">
+      <Project>{C6AFEF8F-52FD-47D6-B4EE-4D93F0EBE96B}</Project>
+      <Name>DbHelperTests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DbHelper\DataBaseHelper.csproj">
       <Project>{BCB4F57C-C0F6-41ED-97B3-019BBCC5B01C}</Project>
       <Name>DataBaseHelper</Name>

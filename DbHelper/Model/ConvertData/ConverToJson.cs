@@ -192,7 +192,7 @@ namespace DataBaseHelper
         /// <typeparam name="T">泛型类型</typeparam>
         /// <param name="obj">对象类型</param>
         /// <returns>返回json字符串对象</returns>
-        public string JsonSerializer<T>(T obj)
+        public override string JsonSerializer<T>(T obj)
         {
             try
             {
@@ -201,6 +201,7 @@ namespace DataBaseHelper
                 ser.WriteObject(stream, obj);
                 byte[] json = stream.ToArray();
                 stream.Close();
+                
                 return Encoding.UTF8.GetString(json, 0, json.Length);                
             }
             catch(Exception e)

@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.Common;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DataBaseHelper.Helper
+namespace DataBaseHelper
 {
     public sealed partial class DbHelper : IDisposable
     {

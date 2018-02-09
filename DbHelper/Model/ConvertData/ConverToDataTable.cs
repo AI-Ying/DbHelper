@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataBaseHelper
 {
-    public partial class ConverData
+    public partial class ConverData : ConverDataCommon
     {
         /// <summary>
         /// 把实体集合转换成DataTable类型
@@ -21,7 +21,7 @@ namespace DataBaseHelper
             try
             {
                 T entity = Activator.CreateInstance<T>();
-                DataTable dt = CreateDataTable<T>(entity.GetType());
+                DataTable dt = map.CreateDataTable<T>(entity.GetType());
                 if (list.Count > 0)
                 {
                     for (int i = 0; i < list.Count; i++)
@@ -48,11 +48,11 @@ namespace DataBaseHelper
             try
             {
                 Type type = entity.GetType();
-                DataRow row = CreateDataTable<T>(type).NewRow();
+                DataRow row = map.CreateDataTable<T>(type).NewRow();
                 PropertyInfo[] proInfo = type.GetProperties();
                 foreach (var p in proInfo)
                 {
-                    string fieldName = ado.GetFieldAttribute(p).FieldName;
+                    string fieldName = map.GetFieldAttribute(p).FieldName;
                     row[fieldName] = p.GetValue(entity);
                 }
                 return row;

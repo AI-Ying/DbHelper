@@ -1,13 +1,9 @@
 ﻿using System.Data;
-using DataBaseHelper.Helper;
-using DataBaseHelper.Map;
 
 namespace DataBaseHelper
 {
-    interface IPageQuery 
+    interface IPageQuery : IDbHelper, IMapHelper
     {
-        DbHelper db { get; set; }
-        DbEntityMap ado { get; set; }
         DataTable QueryWhere<T>(T entity) where T : new();
         DataTable QueryNonWhere<T>() where T : new();
     }

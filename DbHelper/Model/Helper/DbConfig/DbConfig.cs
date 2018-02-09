@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataBaseHelper.Helper.DbConfig
+namespace DataBaseHelper
 {
     public static class DbConfig
     {

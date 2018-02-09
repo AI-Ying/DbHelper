@@ -1,5 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="656d666e-464b-441b-a23e-d9797c46e72a" name="UMLClassEntityOperate" linkedPackageId="da11ab0c-958e-48cb-ac46-5172944d7021" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <ownedCommentsInternal>
+    <comment Id="fdfd852c-3fb2-4c32-9a0f-362abd841a18">
+      <elementDefinition Id="1bd4ab03-4f32-4867-b2e7-a1aff7c38bbd" />
+      <body>通过实体映射实现增删改查</body>
+      <annotatedElements>
+        <classMoniker Id="f22bb725-6ba7-401f-8eb1-f71922a0944b" LastKnownName="Operates" />
+      </annotatedElements>
+    </comment>
+    <comment Id="7c8dc52a-d0d6-4f58-9c0b-3f4f01944651">
+      <elementDefinition Id="592437dd-ae47-468d-9450-10c72ada841d" />
+      <body>通过实体映射实现分页查询</body>
+      <annotatedElements>
+        <classMoniker Id="905bb63f-245e-4242-9ce1-c1338d73ae5e" LastKnownName="PageQuery" />
+      </annotatedElements>
+    </comment>
+    <comment Id="60651a59-7ae6-4273-b219-844fb6508cfb">
+      <elementDefinition Id="8970f6a4-ff50-4b82-9186-23cf57d27945" />
+      <body>操作接口
+增删改查</body>
+      <annotatedElements>
+        <interfaceMoniker Id="be9b9dbc-2f9c-4a62-a472-8db1e1e2ffa6" LastKnownName="IOperate" />
+      </annotatedElements>
+    </comment>
+    <comment Id="89396f97-a588-4e89-822d-c813d66d4848">
+      <elementDefinition Id="a3527411-f7f6-49be-b946-bcaee7a32808" />
+      <body>分页查询接口</body>
+      <annotatedElements>
+        <interfaceMoniker Id="d777e121-ad61-424e-bfc4-d7e59cc64174" LastKnownName="IPageQuery" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
   <appliedStereotypesInternal>
     <stereotypeInstance Id="c99f789e-c22e-492e-8717-d636c1fcffd2" name="namespace" profile="CSharpProfile">
       <elementDefinition Id="62445237-bbbf-4408-b59b-c5f10a0f273a" />
@@ -100,16 +131,6 @@
   </profileInstances>
   <packagedElements>
     <packageHasNamedElement>
-      <referencedType Id="89e6a48c-3d09-4b9e-a6cd-cbaebb2453e3" name="DBHelper" isAbstract="false" isLeaf="false" cachedFullName="DataBaseHelperUML::DBHelper">
-        <elementDefinition Id="3fe47a7e-1a12-466b-bed8-1cbf3537378f" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <referencedType Id="511663ed-fd35-47aa-882f-e56994d604c8" name="Ado" isAbstract="false" isLeaf="false" cachedFullName="DataBaseHelperUML::Ado">
-        <elementDefinition Id="99b56a2e-a759-4a69-9f00-10f3d79ecbd0" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <referencedType Id="aa42062b-b569-4b6f-8b2c-fd4e0915fbcd" name="List&lt;T&gt;" isAbstract="false" isLeaf="false" cachedFullName="List&lt;T&gt;">
         <elementDefinition Id="6c614dd7-ad5f-4ec8-8d26-5bc82dfea108" />
       </referencedType>
@@ -122,11 +143,6 @@
     <packageHasNamedElement>
       <referencedType Id="0e50d86a-7907-4be8-8be6-7d16a2f9db11" name="int" isAbstract="false" isLeaf="false" cachedFullName="int">
         <elementDefinition Id="eff8a9a5-56fc-49e1-a4c1-0ea297de22e0" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <referencedType Id="8b8407b8-7f73-41c1-84c0-f708551da8ea" name="DBHelper" isAbstract="false" isLeaf="false" cachedFullName="DataBaseHelperUML::DBHelper">
-        <elementDefinition Id="3fe47a7e-1a12-466b-bed8-1cbf3537378f" />
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -150,19 +166,19 @@
       </referencedType>
     </packageHasNamedElement>
     <logicalClassDesignerModelHasTypes>
-      <Interface Id="be9b9dbc-2f9c-4a62-a472-8db1e1e2ffa6" name="IOperate1" isAbstract="false" isLeaf="false">
+      <Interface Id="be9b9dbc-2f9c-4a62-a472-8db1e1e2ffa6" name="IOperate" isAbstract="false" isLeaf="false">
         <elementDefinition Id="acc3eb97-a787-497b-b366-4e8aeae1a8d6" />
         <ownedAttributes>
           <property Id="70e78637-ae45-449a-ae27-2baca76ccabb" name="db" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="6961a98f-2588-4665-b64e-8f3bafbab891" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="89e6a48c-3d09-4b9e-a6cd-cbaebb2453e3" LastKnownName="DBHelper" />
+              <referencedTypeMoniker Id="794350e4-1f38-4e50-83a1-b90812277614" LastKnownName="DbHelper" />
             </type_NamedElement>
           </property>
           <property Id="5a389142-475f-4402-b331-8f0ccff449dd" name="ado" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="c495cdb7-f61c-4a62-a351-37aa1fdfc4f8" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="511663ed-fd35-47aa-882f-e56994d604c8" LastKnownName="Ado" />
+              <referencedTypeMoniker Id="e1cf9b66-2290-4821-9e5a-8e48c0194a8a" LastKnownName="DbEntityMap" />
             </type_NamedElement>
           </property>
         </ownedAttributes>
@@ -263,11 +279,11 @@
       </Interface>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="f22bb725-6ba7-401f-8eb1-f71922a0944b" name="Operates1" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="f22bb725-6ba7-401f-8eb1-f71922a0944b" name="Operates" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="d3f8620d-6801-45ec-a8dd-37d8e3e4ee6d" />
         <suppliersInternal>
           <interfaceRealization Id="c55b85fd-b245-432f-bd84-6b5710818d12">
-            <interfaceMoniker Id="be9b9dbc-2f9c-4a62-a472-8db1e1e2ffa6" LastKnownName="IOperate1" />
+            <interfaceMoniker Id="be9b9dbc-2f9c-4a62-a472-8db1e1e2ffa6" LastKnownName="IOperate" />
             <elementDefinition Id="9a0d9384-d1e4-4c9c-9710-35267a26a3ec" />
           </interfaceRealization>
         </suppliersInternal>
@@ -275,13 +291,13 @@
           <property Id="6c5128d9-8db1-47a1-8945-6d551a54894a" name="ado" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="14de4dfe-aa9c-4e9d-bf42-4f3c2203c85d" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="511663ed-fd35-47aa-882f-e56994d604c8" LastKnownName="Ado" />
+              <referencedTypeMoniker Id="d4b52649-cc91-4ef2-aad8-d31baac3a8c8" LastKnownName="DbEntityMap" />
             </type_NamedElement>
           </property>
           <property Id="d39b6dec-27f8-4f2c-81d2-0731dee9a338" name="db" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="472b570d-74f8-4887-bf90-60042babd275" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="8b8407b8-7f73-41c1-84c0-f708551da8ea" LastKnownName="DBHelper" />
+              <referencedTypeMoniker Id="fa594460-99ec-4727-b1a0-9769b6b77854" LastKnownName="DbHelper" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
@@ -495,19 +511,19 @@
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <Interface Id="d777e121-ad61-424e-bfc4-d7e59cc64174" name="IPageQuery1" isAbstract="false" isLeaf="false">
+      <Interface Id="d777e121-ad61-424e-bfc4-d7e59cc64174" name="IPageQuery" isAbstract="false" isLeaf="false">
         <elementDefinition Id="fd481f83-a456-41d0-a268-d39aa746e55a" />
         <ownedAttributes>
           <property Id="6370f2a4-cf4d-467a-a150-9f52aaeec041" name="db" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="66c3ad5d-3a8b-4102-9eeb-b37284d24911" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="89e6a48c-3d09-4b9e-a6cd-cbaebb2453e3" LastKnownName="DBHelper" />
+              <referencedTypeMoniker Id="1f9282fa-b6e4-489b-9738-5aed10b397ec" LastKnownName="DbHelper" />
             </type_NamedElement>
           </property>
           <property Id="96675ba7-efc3-4743-ac0d-7d9db382c052" name="ado" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="b3638650-b2da-4e36-ac15-30584be85b9f" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="511663ed-fd35-47aa-882f-e56994d604c8" LastKnownName="Ado" />
+              <referencedTypeMoniker Id="e941c76b-5644-4ebb-87f4-4557629fd97f" LastKnownName="DbEntityMap" />
             </type_NamedElement>
           </property>
         </ownedAttributes>
@@ -550,11 +566,11 @@
       </Interface>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="905bb63f-245e-4242-9ce1-c1338d73ae5e" name="PageQuery1" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="905bb63f-245e-4242-9ce1-c1338d73ae5e" name="PageQuery" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="fe8b4193-db61-49f3-b901-4a446be6bcc1" />
         <suppliersInternal>
           <interfaceRealization Id="0caffb42-c48a-4b27-8db4-0d334e20d1d6">
-            <interfaceMoniker Id="d777e121-ad61-424e-bfc4-d7e59cc64174" LastKnownName="IPageQuery1" />
+            <interfaceMoniker Id="d777e121-ad61-424e-bfc4-d7e59cc64174" LastKnownName="IPageQuery" />
             <elementDefinition Id="17030308-dfdf-4872-ad2b-7ad6766b21d5" />
           </interfaceRealization>
         </suppliersInternal>
@@ -562,13 +578,13 @@
           <property Id="239fe9d3-9255-424b-8dbf-05945e8c3bbc" name="ado" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="aa76bf74-1846-4f82-ab96-60f14d57e1e4" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="511663ed-fd35-47aa-882f-e56994d604c8" LastKnownName="Ado" />
+              <referencedTypeMoniker Id="4dda5945-b0e7-4f37-86d6-0c2d86d75148" LastKnownName="DbEntityMap" />
             </type_NamedElement>
           </property>
           <property Id="3e19d6fa-d626-4bfb-8608-489d9316c6e0" name="db" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="c184a411-553b-4844-b9f0-927fd47971e7" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="89e6a48c-3d09-4b9e-a6cd-cbaebb2453e3" LastKnownName="DBHelper" />
+              <referencedTypeMoniker Id="5cf9f7dc-c5dd-481a-bd7c-6852bcf4937c" LastKnownName="DbHelper" />
             </type_NamedElement>
           </property>
           <property Id="2dbd4428-fecc-40fa-bb51-9db1d81cee82" name="PrimaryKey" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -762,6 +778,46 @@
         </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="e1cf9b66-2290-4821-9e5a-8e48c0194a8a" name="DbEntityMap" isAbstract="false" isLeaf="false" cachedFullName="DataBaseHelperUML::DbEntityMap">
+        <elementDefinition Id="b8eb7fbe-b289-452c-8f6c-753366ad9981" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="794350e4-1f38-4e50-83a1-b90812277614" name="DbHelper" isAbstract="false" isLeaf="false" cachedFullName="DataBaseHelperUML::DbHelper">
+        <elementDefinition Id="8cfac440-5e9f-427a-a1e4-19813df2372b" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="d4b52649-cc91-4ef2-aad8-d31baac3a8c8" name="DbEntityMap" isAbstract="false" isLeaf="false" cachedFullName="DataBaseHelperUML::DbEntityMap">
+        <elementDefinition Id="b8eb7fbe-b289-452c-8f6c-753366ad9981" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="fa594460-99ec-4727-b1a0-9769b6b77854" name="DbHelper" isAbstract="false" isLeaf="false" cachedFullName="DataBaseHelperUML::DbHelper">
+        <elementDefinition Id="8cfac440-5e9f-427a-a1e4-19813df2372b" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="e941c76b-5644-4ebb-87f4-4557629fd97f" name="DbEntityMap" isAbstract="false" isLeaf="false" cachedFullName="DataBaseHelperUML::DbEntityMap">
+        <elementDefinition Id="b8eb7fbe-b289-452c-8f6c-753366ad9981" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="1f9282fa-b6e4-489b-9738-5aed10b397ec" name="DbHelper" isAbstract="false" isLeaf="false" cachedFullName="DataBaseHelperUML::DbHelper">
+        <elementDefinition Id="8cfac440-5e9f-427a-a1e4-19813df2372b" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="4dda5945-b0e7-4f37-86d6-0c2d86d75148" name="DbEntityMap" isAbstract="false" isLeaf="false" cachedFullName="DataBaseHelperUML::DbEntityMap">
+        <elementDefinition Id="b8eb7fbe-b289-452c-8f6c-753366ad9981" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="5cf9f7dc-c5dd-481a-bd7c-6852bcf4937c" name="DbHelper" isAbstract="false" isLeaf="false" cachedFullName="DataBaseHelperUML::DbHelper">
+        <elementDefinition Id="8cfac440-5e9f-427a-a1e4-19813df2372b" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="da11ab0c-958e-48cb-ac46-5172944d7021" name="DataBaseHelperUML">
     <elementDefinition Id="f35070c9-7434-4602-be3e-dd720b849157" />

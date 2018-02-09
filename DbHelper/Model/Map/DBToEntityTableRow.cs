@@ -3,9 +3,9 @@ using System.Data;
 using System.Data.Common;
 using System.Reflection;
 
-namespace DataBaseHelper.Map
+namespace DataBaseHelper
 {
-    public partial class DbEntityMap
+    public partial class DbEntityMap : IDbHelper, IMapHelper
     {
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace DataBaseHelper.Map
                 PropertyInfo[] proInfo = type.GetProperties();
                 foreach (var p in proInfo)
                 {
-                    var fieldName = GetFieldAttribute(p).FieldName;
+                    var fieldName = map.GetFieldAttribute(p).FieldName;
                     if (dt.Columns.Contains(fieldName))
                     {
                         dt.Columns[fieldName].ColumnName = p.Name;

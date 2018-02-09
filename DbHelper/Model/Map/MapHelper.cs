@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Reflection;
-using DataBaseHelper.Helper;
-using DataBaseHelper.Map.AttributeMap;
+using DataBaseHelper;
 
-namespace DataBaseHelper.Map
+namespace DataBaseHelper
 {
-    public partial class DbEntityMap
+    public class MapHelper : IDbHelper
     {
         public DbHelper db { get { return new DbHelper(); } set { } }
         public List<DbParameter> ParamList { get; set; }
@@ -44,6 +44,49 @@ namespace DataBaseHelper.Map
             return (DbDataFieldAttribute)p.GetCustomAttributes(typeof(DbDataFieldAttribute), true).FirstOrDefault();
         }
         /// <summary>
+        /// 设置类型的空值。
+        /// </summary>
+        /// <param name="type">System.Data类型</param>
+        /// <returns>返回类型空值对象</returns>
+        private object DBNull(Type type)
+        {
+            try
+            {
+                if (type == typeof(int))
+                {
+                    return default(int);
+                }
+                else if (type == typeof(double))
+                {
+                    return default(double);
+                }
+                else if (type == typeof(string))
+                {
+                    return default(string);
+                }
+                else if (type == typeof(decimal))
+                {
+                    return default(decimal);
+                }
+                else if (type == typeof(DateTime))
+                {
+                    return default(DateTime);
+                }
+                else if (type == typeof(bool))
+                {
+                    return default(bool);
+                }
+                else
+                {
+                    return default(Guid);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        /// <summary>
         /// 获取Sql语句查询中的表名参数
         /// </summary>
         /// <typeparam name="T">实体类类型</typeparam>
@@ -72,7 +115,8 @@ namespace DataBaseHelper.Map
             foreach (var p in proInfo)
             {
                 var properAttribute = GetFieldAttribute(p);
-                if (p.GetValue(entity, null) != null)
+                bool isNull = p.GetValue(entity, null).Equals(DBNull(p.PropertyType));
+                if (!isNull)
                 {
                     DbParameter param = db.Factory.CreateParameter();
                     param.ParameterName = "@" + properAttribute.FieldName;
@@ -96,7 +140,8 @@ namespace DataBaseHelper.Map
             foreach (var p in proInfo)
             {
                 var properAttribute = GetFieldAttribute(p);
-                if (p.GetValue(entity, null) != null)
+                bool isNull = p.GetValue(entity, null).Equals(DBNull(p.PropertyType));
+                if (!isNull)
                 {
                     DbParameter param = db.Factory.CreateParameter();
                     param.ParameterName = "@New" + properAttribute.FieldName;
@@ -125,7 +170,30 @@ namespace DataBaseHelper.Map
                 throw new Exception(e.Message);
             }
         }
+        /// <summary>
+        /// 根据实体，映射DataTable架构
+        /// </summary>
+        /// <typeparam name="T">泛型实体</typeparam>
+        /// <param name="type">实体类型</param>
+        /// <returns>返回一个DataTable类型</returns>
+        public DataTable CreateDataTable<T>(Type type)
+        {
+            try
+            {
+                string tableName = GetTableName(type);
+                DataTable dt = new DataTable(tableName);
+                PropertyInfo[] proInfo = type.GetProperties();
+                foreach (var p in proInfo)
+                {
+                    dt.Columns.Add(p.Name, p.PropertyType);
+                }
+                return dt;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
 
-        
     }
 }

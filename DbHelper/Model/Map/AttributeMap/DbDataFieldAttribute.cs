@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataBaseHelper.Map.AttributeMap
+namespace DataBaseHelper
 {
     /// <summary>
     /// 定义实体类属性特性，用来反射数据库表的字段

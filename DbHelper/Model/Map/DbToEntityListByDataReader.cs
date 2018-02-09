@@ -4,10 +4,12 @@ using System.Data;
 using System.Data.Common;
 using System.Reflection;
 
-namespace DataBaseHelper.Map
+namespace DataBaseHelper
 {
-    public partial class DbEntityMap
+    public partial class DbEntityMap : IDbHelper
     {
+        public MapHelper map { get { return new MapHelper(); } set { } }
+        public DbHelper db { get { return new DbHelper(); } set { } }
 
         /// <summary>
         /// 根据DataReader的返回结果转化成一个实体类集合
@@ -27,7 +29,7 @@ namespace DataBaseHelper.Map
                 {
                     foreach (var p in proInfo)
                     {
-                        var fieldAttribute = GetFieldAttribute(p);
+                        var fieldAttribute = map.GetFieldAttribute(p);
                         p.SetValue(entity, reader[fieldAttribute.FieldName]);
                     }
                     list.Add(entity);
