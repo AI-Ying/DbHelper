@@ -22,26 +22,26 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
   <ItemGroup>
-    <Content Include="UMLClassDBHelper.classdiagram">
+    <Content Include="UMLClassDbHelper.classdiagram">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="UMLClassDBHelper.classdiagram.layout">
+    <Content Include="UMLClassDbHelper.classdiagram.layout">
       <SubType>Content</SubType>
-      <DependentUpon>UMLClassDBHelper.classdiagram</DependentUpon>
+      <DependentUpon>UMLClassDbHelper.classdiagram</DependentUpon>
     </Content>
-    <Content Include="UMLClassAdo.classdiagram">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="UMLClassAdo.classdiagram.layout">
-      <SubType>Content</SubType>
-      <DependentUpon>UMLClassAdo.classdiagram</DependentUpon>
-    </Content>
-    <Content Include="UMLClassDiagram.classdiagram">
+    <Content Include="UMLClassDbEntityMap.classdiagram">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="UMLClassDiagram.classdiagram.layout">
+    <Content Include="UMLClassDbEntityMap.classdiagram.layout">
       <SubType>Content</SubType>
-      <DependentUpon>UMLClassDiagram.classdiagram</DependentUpon>
+      <DependentUpon>UMLClassDbEntityMap.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="UMLClassEntityOperate.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UMLClassEntityOperate.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>UMLClassEntityOperate.classdiagram</DependentUpon>
     </Content>
     <Folder Include="ModelDefinition\" />
     <Content Include="ModelDefinition\DataBaseHelperUML.uml">

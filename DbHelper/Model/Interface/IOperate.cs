@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataBaseHelper;
+﻿using System.Collections.Generic;
+using DataBaseHelper.Helper;
+using DataBaseHelper.Map;
 
 namespace DataBaseHelper
 {
     public interface IOperate 
     {
-        DBHelper db { get; set; }
-        Ado ado { get; set; }
+        DbHelper db { get; set; }
+        DbEntityMap ado { get; set; }
         List<T> Query<T>(T entity) where T : new();
         int Add<T>(T entity) where T : new();
         int Delete<T>(T entity) where T : new();

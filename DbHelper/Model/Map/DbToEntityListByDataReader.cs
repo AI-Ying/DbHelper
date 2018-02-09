@@ -4,9 +4,9 @@ using System.Data;
 using System.Data.Common;
 using System.Reflection;
 
-namespace DataBaseHelper
+namespace DataBaseHelper.Map
 {
-    public partial class Ado
+    public partial class DbEntityMap
     {
 
         /// <summary>

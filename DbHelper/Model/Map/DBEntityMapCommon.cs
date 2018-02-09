@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using DataBaseHelper;
+using DataBaseHelper.Helper;
+using DataBaseHelper.Map.AttributeMap;
 
-namespace DataBaseHelper
+namespace DataBaseHelper.Map
 {
-    public partial class Ado
+    public partial class DbEntityMap
     {
-        public DBHelper db { get { return new DBHelper(); } set { } }
-        public List<DbParameter> Param { get; set; }
+        public DbHelper db { get { return new DbHelper(); } set { } }
+        public List<DbParameter> ParamList { get; set; }
+        public DbParameter[] Param { get { return ParamList.ToArray(); } }
 
         /// <summary>
         /// 获取数据库中表的名称
@@ -49,9 +48,9 @@ namespace DataBaseHelper
         /// </summary>
         /// <typeparam name="T">实体类类型</typeparam>
         /// <returns></returns>
-        public DbParameter[] GetTableParameters<T>() where T : new()
+        public DbParameter[] GetTableParameters<T>()
         {
-            T entity = new T();
+            T entity = default(T);
             List<DbParameter> paramList = new List<DbParameter>();
             var properAttribute = GetTableAttribute(entity.GetType());
             DbParameter param = db.Factory.CreateParameter();
@@ -65,7 +64,7 @@ namespace DataBaseHelper
         /// </summary>
         /// <typeparam name="T">实体类类型</typeparam>
         /// <returns></returns>
-        public DbParameter[] GetParameters<T>(T entity) where T : new()
+        public DbParameter[] GetParameters<T>(T entity)
         {
             Type type = entity.GetType();
             PropertyInfo[] proInfo = type.GetProperties();
@@ -119,7 +118,7 @@ namespace DataBaseHelper
                 DbParameter par = db.Factory.CreateParameter();
                 par.ParameterName = $"@{parString}";
                 par.Value = value;
-                Param.Add(par);
+                ParamList.Add(par);
             }
             catch (Exception e)
             {

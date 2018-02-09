@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DataBaseHelper
+namespace DataBaseHelper.Map
 {
-    public partial class Ado
+    public partial class DbEntityMap
     {
 
         /// <summary>

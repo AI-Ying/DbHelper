@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DataBaseHelper
+namespace DataBaseHelper.Map.AttributeMap
 {
     /// <summary>
     /// 定义实体类特性，用来反射数据库表名。

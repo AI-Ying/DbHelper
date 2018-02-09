@@ -44,21 +44,22 @@
   <ItemGroup>
     <Compile Include="Model\Client\SqlClient.cs" />
     <Compile Include="Model\Client\SqlClientFactory.cs" />
-    <Compile Include="Model\Common\Ado.cs" />
-    <Compile Include="Model\Common\Attribute\DbDataFieldAttribute.cs" />
-    <Compile Include="Model\Common\Attribute\DbTableAttribute.cs" />
-    <Compile Include="Model\Common\EntityDataTableRow.cs" />
-    <Compile Include="Model\Common\EntityDataReaderList.cs" />
+    <Compile Include="Model\Map\DbEntityMapCommon.cs" />
+    <Compile Include="Model\Map\AttributeMap\DbDataFieldAttribute.cs" />
+    <Compile Include="Model\Map\AttributeMap\DbTableAttribute.cs" />
+    <Compile Include="Model\Map\DbToEntityTableRow.cs" />
+    <Compile Include="Model\Map\DbToEntityListByDataReader.cs" />
     <Compile Include="Model\ConvertData\ConverData.cs" />
     <Compile Include="Model\ConvertData\ConverToDataTable.cs" />
     <Compile Include="Model\ConvertData\ConverToJson.cs" />
     <Compile Include="Model\ConvertData\ConverToList.cs" />
     <Compile Include="Model\ConvertData\ConverToXml.cs" />
-    <Compile Include="Model\DbHelper\DbConfig\DbConfig.cs" />
-    <Compile Include="Model\DbHelper\DbHelper.cs" />
+    <Compile Include="Model\Helper\DbConfig\DbConfig.cs" />
+    <Compile Include="Model\Helper\DbHelper.cs" />
     <Compile Include="Model\Interface\IOperate.cs" />
     <Compile Include="Model\Interface\IPageQuery.cs" />
-    <Compile Include="Model\Operate\PageQuery.cs" />
+    <Compile Include="Model\EntityOperate\Operate.cs" />
+    <Compile Include="Model\EntityOperate\PageQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

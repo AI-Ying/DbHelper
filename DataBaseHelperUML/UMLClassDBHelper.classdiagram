@@ -209,7 +209,7 @@
       </referencedType>
     </packageHasNamedElement>
     <logicalClassDesignerModelHasTypes>
-      <class Id="8b3f5186-ec71-4681-9e92-c13a41fbf651" name="DBHelper" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="8b3f5186-ec71-4681-9e92-c13a41fbf651" name="DbHelper" isAbstract="false" isLeaf="false" isActiveClass="false">
         <appliedStereotypesInternal>
           <stereotypeInstance Id="f00d49d2-aa41-451e-b344-8aee7d7a1b93" name="class" profile="CSharpProfile">
             <elementDefinition Id="19dcc770-a37e-4544-89ee-2ec533c6aca1" />
@@ -670,7 +670,7 @@
           </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
-          <operation Id="44f1776c-ebd8-415b-91f7-0e6aa07720bf" name="DBHelper" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+          <operation Id="44f1776c-ebd8-415b-91f7-0e6aa07720bf" name="DbHelper" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <appliedStereotypesInternal>
               <stereotypeInstance Id="3326a488-221c-4ff8-aaf2-6f8da6b2bf4a" name="method" profile="CSharpProfile">
                 <elementDefinition Id="0f2f5138-48d5-4342-96b3-9b476f905069" />

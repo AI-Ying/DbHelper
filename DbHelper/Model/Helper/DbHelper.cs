@@ -8,9 +8,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataBaseHelper
+namespace DataBaseHelper.Helper
 {
-    public sealed partial class DBHelper : IDisposable
+    public sealed partial class DbHelper : IDisposable
     {
         #region Properties
 
@@ -26,7 +26,7 @@ namespace DataBaseHelper
 
         #region Constructor
 
-        public DBHelper()
+        public DbHelper()
         {
             ConnectionString = DbConfig.ConnectionString;
             ProviderName = DbConfig.ProviderName;

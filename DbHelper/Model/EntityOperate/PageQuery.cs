@@ -6,14 +6,15 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using DataBaseHelper;
+using DataBaseHelper.Helper;
+using DataBaseHelper.Map;
 
-namespace DataBaseHelper
+namespace DataBaseHelper.EntityOperate
 {
-    public class QuyeyMaxTop : IPageQuery
+    public class PageQuyeyMaxTop : IPageQuery
     {
-        public Ado ado { get { return new Ado(); } set { } }
-        public DBHelper db { get { return new DBHelper(); } set { } }
+        public DbEntityMap ado { get { return new DbEntityMap(); } set { } }
+        public DbHelper db { get { return new DbHelper(); } set { } }
         /// <summary>
         /// 分页查询所需的主键
         /// </summary>
