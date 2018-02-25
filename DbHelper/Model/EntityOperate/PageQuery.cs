@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using DataBaseHelper;
 
 namespace DataBaseHelper
 {
@@ -14,6 +10,7 @@ namespace DataBaseHelper
     {
         public MapHelper map { get { return new MapHelper(); } set { } }
         public DbHelper db { get { return new DbHelper(); } set { } }
+        public DbEntityMap tableMap { get { return new DbEntityMap(); } set { } }
         /// <summary>
         /// 分页查询所需的主键
         /// </summary>
@@ -50,42 +47,22 @@ namespace DataBaseHelper
             }
         }
         /// <summary>
-        /// 把实体条件转换成sql语句的查询条件
-        /// </summary>
-        /// <typeparam name="T">泛型实体</typeparam>
-        /// <param name="entity">实体类型</param>
-        /// <returns>返回一个字符串：分页查询的sql查询条件</returns>
-        public string QueryPrerequisite<T>(T entity) where T : new()
-        {
-            StringBuilder fieldString = new StringBuilder();
-            Type entityType = entity.GetType();
-            PropertyInfo[] proInfo = entityType.GetProperties();
-            List<DbParameter> paramList = new List<DbParameter>();
-            foreach (var p in proInfo)
-            {
-                var properAttribute = map.GetFieldAttribute(p);
-                if (p.GetValue(entity, null) != null)
-                {
-                    fieldString.Append($"{properAttribute.FieldName}=@{properAttribute.FieldName} and ");
-                }
-            }
-            string where = fieldString.ToString().TrimEnd("and ".ToCharArray());
-            return where;
-        }
-        /// <summary>
         /// 把分页查询的结果转换成DataTable
         /// </summary>
         /// <typeparam name="T">泛型实体</typeparam>
         /// <param name="entity">实体类型</param>
         /// <returns>返回一个DataTable</returns>
-        public DataTable GetPageData<T>(T entity) where T : new()
+        public DataTable GetPageData<T>(T entity)
         {
             try
             {
                 string tableName = map.GetTableName(entity.GetType());
+                string where = map.GetSetWhereStr(entity);
+                List<DbParameter> paramTable = map.GetTableNameParameters<T>().ToList();
+                List<DbParameter> paramWhere = map.GetParameters(entity).ToList();
+                paramTable.AddRange(paramWhere);
+                DbParameter[] param = paramTable.ToArray();               
                 string sql = string.Empty;
-                DbParameter[] param = map.GetParameters(entity);
-                string where = QueryPrerequisite(entity);
                 int dataCount = GetDataCount(tableName, param, where);
                 if (dataCount > PageSize)
                 {
@@ -100,7 +77,7 @@ namespace DataBaseHelper
                     return null;
                 }
                 db.BeginTransaction();
-                DataTable dt = db.GetDataTable(sql, param);
+                DataTable dt = tableMap.GetDataTable<T>(sql, param);
                 db.CommitTransaction();
                 return dt;
             }
@@ -116,7 +93,7 @@ namespace DataBaseHelper
         /// <typeparam name="T">泛型实体</typeparam>
         /// <param name="entity">实体类型</param>
         /// <returns>返回一个DataTable</returns>
-        public DataTable QueryWhere<T>(T entity) where T : new()
+        public DataTable QueryWhere<T>(T entity)
         {
             try
             {
@@ -134,31 +111,16 @@ namespace DataBaseHelper
         #region 不带条件的分页查询
 
         /// <summary>
-        /// 获取数据表表名的参数转化成sql语句类型
-        /// </summary>
-        /// <typeparam name="T">泛型类型</typeparam>
-        /// <returns>返回一个字符串</returns>
-        public string GetTableNameParameter<T>() where T : new()
-        {
-            T entity = new T();
-            StringBuilder tableNameString = new StringBuilder();
-            List<DbParameter> paramList = new List<DbParameter>();
-            var properAttribute = map.GetTableAttribute(entity.GetType());
-            tableNameString.Append($"{properAttribute.TableName}");
-            string tableName = tableNameString.ToString();
-            return tableName;
-        }
-        /// <summary>
         /// 获取分页所需的总数据大小
         /// </summary>
         /// <param name="tableName">数据库表名</param>
         /// <param name="param">sql查询参数</param>
         /// <returns>返回一个整型值：数据量</returns>
-        public int GetDataCount(string tableName, DbParameter[] param)
+        private int GetDataCount(string tableName, DbParameter[] param)
         {
             try
             {
-                string sql = $"select count(*) from {tableName};";
+                string sql = $"Select count(*) from {tableName};";
                 int count = Convert.ToInt32(db.ExecuteScalar(sql, param));
                 return count;
             }
@@ -172,14 +134,14 @@ namespace DataBaseHelper
         /// </summary>
         /// <typeparam name="T">泛型实体</typeparam>
         /// <returns>返回一个DataTable</returns>
-        public DataTable GetPageData<T>() where T : new()
+        public DataTable GetPageData<T>()
         {
             try
             {
-                T entity = new T();
-                string tableName = GetTableNameParameter<T>();
+                T entity = Activator.CreateInstance<T>();
+                string tableName = map.GetTableName(entity.GetType());
+                DbParameter[] param = map.GetTableNameParameters<T>();
                 string sql = string.Empty;
-                DbParameter[] param = map.GetTableParameters<T>();
                 int dataCount = GetDataCount(tableName, param);
                 if (dataCount > PageSize)
                 {
@@ -194,7 +156,7 @@ namespace DataBaseHelper
                     return null;
                 }
                 db.BeginTransaction();
-                DataTable dt = db.GetDataTable(sql, param);
+                DataTable dt = tableMap.GetDataTable<T>(sql, param);
                 db.CommitTransaction();
                 return dt;
             }
@@ -209,7 +171,7 @@ namespace DataBaseHelper
         /// </summary>
         /// <typeparam name="T">泛型实体</typeparam>
         /// <returns>返回一个DataTable</returns>
-        public DataTable QueryNonWhere<T>() where T : new()
+        public DataTable QueryNonWhere<T>()
         {
             try
             {

@@ -57,7 +57,6 @@
     <Compile Include="Common\AdoTests.cs" />
     <Compile Include="ConvertData\ConvertToJsonTests.cs" />
     <Compile Include="DBHelperTests\DBHelperTests.cs" />
-    <Compile Include="EntityTest\Student.cs" />
     <Compile Include="Operate\OperateTests.cs" />
     <Compile Include="Operate\QuyeyMaxTopTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,6 +66,9 @@
       <Project>{BCB4F57C-C0F6-41ED-97B3-019BBCC5B01C}</Project>
       <Name>DataBaseHelper</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EntityTest\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -1,12 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DataBaseHelper.Map;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DbHelperTests.EntityTest;
 using System.Data.Common;
+using DataBaseHelperTests.Model;
 
 namespace DataBaseHelper.Map.Tests
 {

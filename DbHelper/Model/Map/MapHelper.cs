@@ -15,16 +15,7 @@ namespace DataBaseHelper
         public List<DbParameter> ParamList { get; set; }
         public DbParameter[] Param { get { return ParamList.ToArray(); } }
 
-        /// <summary>
-        /// 获取数据库中表的名称
-        /// </summary>
-        /// <param name="type">实体类类型</param>
-        /// <returns></returns>
-        public string GetTableName(Type type)
-        {
-            var tableAttribute = (DbTableAttribute)type.GetCustomAttributes(typeof(DbTableAttribute), true).FirstOrDefault();
-            return tableAttribute == null ? type.Name : tableAttribute.TableName;
-        }
+
         /// <summary>
         /// 根据反射，获取实体类的特性
         /// </summary>
@@ -91,19 +82,29 @@ namespace DataBaseHelper
             }
         }
         /// <summary>
+        /// 获取数据库中表的名称
+        /// </summary>
+        /// <param name="type">实体类类型</param>
+        /// <returns></returns>
+        public string GetTableName(Type type)
+        {
+            var tableAttribute = (DbTableAttribute)type.GetCustomAttributes(typeof(DbTableAttribute), true).FirstOrDefault();
+            return tableAttribute == null ? type.Name : tableAttribute.TableName;
+        }
+        /// <summary>
         /// 获取Sql语句查询中的表名参数
         /// </summary>
         /// <typeparam name="T">实体类类型</typeparam>
         /// <returns></returns>
-        public DbParameter[] GetTableParameters<T>()
+        public DbParameter[] GetTableNameParameters<T>()
         {
             try
             {
-                T entity = default(T);
+                T entity = Activator.CreateInstance<T>();
                 List<DbParameter> paramList = new List<DbParameter>();
                 var properAttribute = GetTableAttribute(entity.GetType());
                 DbParameter param = db.Factory.CreateParameter();
-                param.ParameterName = properAttribute.TableName;
+                param.ParameterName = $"{properAttribute.TableName}";
                 param.Value = properAttribute.TableName;
                 paramList.Add(param);
                 return paramList.ToArray();

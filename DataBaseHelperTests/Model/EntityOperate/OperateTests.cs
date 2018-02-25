@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DbHelperTests.EntityTest;
+using DataBaseHelperTests.Model;
 
 namespace DataBaseHelper.Tests
 {
@@ -32,15 +32,15 @@ namespace DataBaseHelper.Tests
         public void QueryTest()
         {
             Operate oper = new Operate();
-            List<Student> list = oper.Query(new Student() { Name = "Park" });
-            Assert.AreEqual(list[0].ID, 0);
+            List<Student> list = oper.Query(new Student() { ID = 1 });
+            Assert.AreEqual(list[0].Name, "Ying");
         }
 
         [TestMethod()]
         public void UpdateTest()
         {
             Operate opre = new Operate();
-            int result = opre.Update(new Student { Name = "jimi"}, new Student { Name = "Park"});
+            int result = opre.Update(new Student { Name = "AI"}, new Student { Name = "Ying"});
             Assert.AreEqual(result, 1);
         }
     }

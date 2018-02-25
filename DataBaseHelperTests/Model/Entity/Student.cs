@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using DataBaseHelper;
 
-namespace DbHelperTests.EntityTest
+namespace DataBaseHelperTests.Model
 {
     [DbTable("Student")]
     [DataContract]
