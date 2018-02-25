@@ -106,10 +106,10 @@
       <commentMoniker Id="25be7c7b-cf1d-4079-8ef2-1321018468bd" />
       <relativeChildShapes />
     </commentShape>
-    <commentConnector edgePoints="[(7.75 : 4.75); (8.375 : 5.6897166454044)]" fixedFrom="NotFixed" fixedTo="Caller" TargetRelationshipDomainClassId="217d6bd0-42ed-4e7f-ad2b-af3ef5142428" customColor="Black">
+    <commentConnector edgePoints="[(7.75 : 5); (8.375 : 5.125)]" fixedFrom="NotFixed" fixedTo="NotFixed" TargetRelationshipDomainClassId="217d6bd0-42ed-4e7f-ad2b-af3ef5142428" customColor="Black">
       <relativeChildShapes />
       <moveableDecoratorHostShapes>
-        <moveableDecoratorHostShape manuallyPlaced="true" absoluteBounds="7.8241566550470623, 5.467568600329785, 0.125, 0.15087890625" shapeFieldName="Stereotype" />
+        <moveableDecoratorHostShape manuallyPlaced="true" absoluteBounds="8.3453774721030012, 5.3879545972383642, 0.125, 0.15087890625" shapeFieldName="Stereotype" />
       </moveableDecoratorHostShapes>
       <nodes>
         <commentShapeMoniker Id="9f1aa458-06d2-4996-9576-ce3e1c882e63" />

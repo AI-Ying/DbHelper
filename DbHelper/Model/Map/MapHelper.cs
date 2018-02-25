@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using DataBaseHelper;
 
 namespace DataBaseHelper
@@ -43,12 +44,15 @@ namespace DataBaseHelper
         {
             return (DbDataFieldAttribute)p.GetCustomAttributes(typeof(DbDataFieldAttribute), true).FirstOrDefault();
         }
+
+        #region 设置参数化查询实体映射
+
         /// <summary>
         /// 设置类型的空值。
         /// </summary>
         /// <param name="type">System.Data类型</param>
         /// <returns>返回类型空值对象</returns>
-        private object DBNull(Type type)
+        public object DBNull(Type type)
         {
             try
             {
@@ -93,14 +97,52 @@ namespace DataBaseHelper
         /// <returns></returns>
         public DbParameter[] GetTableParameters<T>()
         {
-            T entity = default(T);
-            List<DbParameter> paramList = new List<DbParameter>();
-            var properAttribute = GetTableAttribute(entity.GetType());
-            DbParameter param = db.Factory.CreateParameter();
-            param.ParameterName = properAttribute.TableName;
-            param.Value = properAttribute.TableName;
-            paramList.Add(param);
-            return paramList.ToArray();
+            try
+            {
+                T entity = default(T);
+                List<DbParameter> paramList = new List<DbParameter>();
+                var properAttribute = GetTableAttribute(entity.GetType());
+                DbParameter param = db.Factory.CreateParameter();
+                param.ParameterName = properAttribute.TableName;
+                param.Value = properAttribute.TableName;
+                paramList.Add(param);
+                return paramList.ToArray();
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
+        /// <summary>
+        /// 获取sql语句查询中的字段参数:用于更新数据中的参数
+        /// </summary>
+        /// <typeparam name="T">泛型实体</typeparam>
+        /// <param name="entity">实体类型</param>
+        /// <returns></returns>
+        public DbParameter[] GetParameters<T>(T entity, string str)
+        {
+            try
+            {
+                PropertyInfo[] proInfo = entity.GetType().GetProperties();
+                List<DbParameter> paramList = new List<DbParameter>();
+                foreach (var p in proInfo)
+                {
+                    var properAttribute = GetFieldAttribute(p);
+                    bool isNull = object.Equals(p.GetValue(entity, null), DBNull(p.PropertyType));
+                    if (!isNull)
+                    {
+                        DbParameter param = db.Factory.CreateParameter();
+                        param.ParameterName = $"@{str}{properAttribute.FieldName}";
+                        param.Value = p.GetValue(entity);
+                        paramList.Add(param);
+                    }
+                }
+                return paramList.ToArray();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
         /// <summary>
         /// 获取Sql语句查询中的字段参数
@@ -109,48 +151,119 @@ namespace DataBaseHelper
         /// <returns></returns>
         public DbParameter[] GetParameters<T>(T entity)
         {
-            Type type = entity.GetType();
-            PropertyInfo[] proInfo = type.GetProperties();
-            List<DbParameter> paramList = new List<DbParameter>();
-            foreach (var p in proInfo)
+            try
             {
-                var properAttribute = GetFieldAttribute(p);
-                bool isNull = p.GetValue(entity, null).Equals(DBNull(p.PropertyType));
-                if (!isNull)
-                {
-                    DbParameter param = db.Factory.CreateParameter();
-                    param.ParameterName = "@" + properAttribute.FieldName;
-                    param.Value = p.GetValue(entity);
-                    paramList.Add(param);
-                }
+                return GetParameters<T>(entity, string.Empty);
             }
-            return paramList.ToArray();
+            catch (Exception e)
+            {
+                throw e;
+            }      
         }
         /// <summary>
-        /// 获取sql语句查询中的字段参数:用于更新数据中的参数
+        /// 获取实体映射成数据库字段的字符串
         /// </summary>
         /// <typeparam name="T">泛型实体</typeparam>
-        /// <param name="entity">实体类型</param>
-        /// <returns></returns>
-        public DbParameter[] GetNewParameters<T>(T entity)
+        /// <param name="entity"></param>
+        /// <returns>返回格式化好的字符串</returns>
+        public string GetFieldNameStr<T>(T entity)
         {
-            Type type = entity.GetType();
-            PropertyInfo[] proInfo = type.GetProperties();
-            List<DbParameter> paramList = new List<DbParameter>();
-            foreach (var p in proInfo)
+            try
             {
-                var properAttribute = GetFieldAttribute(p);
-                bool isNull = p.GetValue(entity, null).Equals(DBNull(p.PropertyType));
-                if (!isNull)
+                StringBuilder fieldNameStr = new StringBuilder();
+                PropertyInfo[] proInfo = entity.GetType().GetProperties();
+                foreach (var p in proInfo)
                 {
-                    DbParameter param = db.Factory.CreateParameter();
-                    param.ParameterName = "@New" + properAttribute.FieldName;
-                    param.Value = p.GetValue(entity);
-                    paramList.Add(param);
+                    var properAttribute = GetFieldAttribute(p);
+                    bool isNull = object.Equals(p.GetValue(entity, null), DBNull(p.PropertyType));
+                    if (!isNull)
+                    {
+                        fieldNameStr.Append($"{properAttribute.FieldName},");
+                    }
                 }
+                return fieldNameStr.ToString().TrimEnd(',');
             }
-            return paramList.ToArray();
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
+        /// <summary>
+        /// 获取实体映射成数据库字段参数的字符串
+        /// </summary>
+        /// <typeparam name="T">实体泛型</typeparam>
+        /// <param name="entity"></param>
+        /// <returns>返回格式化好的字符串</returns>
+        public string GetFieldValueStr<T>(T entity)
+        {
+            try
+            {
+                StringBuilder fieldValueStr = new StringBuilder();
+                PropertyInfo[] proInfo = entity.GetType().GetProperties();
+                foreach (var p in proInfo)
+                {
+                    var properAttribute = GetFieldAttribute(p);
+                    bool isNull = object.Equals(p.GetValue(entity, null), DBNull(p.PropertyType));
+                    if (!isNull)
+                    {
+                        fieldValueStr.Append($"@{properAttribute.FieldName},");
+                    }
+                }
+                return fieldValueStr.ToString().TrimEnd(',');
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        /// <summary>
+        /// 获取实体映射查询、更新、删除时的数据库字段参数的字符串
+        /// </summary>
+        /// <typeparam name="T">实体泛型</typeparam>
+        /// <param name="entity"></param>
+        /// <returns>返回格式好的字符串</returns>
+        public string GetSetWhereStr<T>(T entity, string str)
+        {
+            try
+            {
+                StringBuilder whereStr = new StringBuilder();
+                PropertyInfo[] proInfo = entity.GetType().GetProperties();
+                foreach (var p in proInfo)
+                {
+                    var properAttribute = GetFieldAttribute(p);
+                    bool isNull = object.Equals(p.GetValue(entity, null), DBNull(p.PropertyType));
+                    if (!isNull)
+                    {
+                        whereStr.Append($"{properAttribute.FieldName}=@{str}{properAttribute.FieldName} and ");
+                    }
+                }
+                return whereStr.ToString().TrimEnd("and ".ToCharArray());
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        /// <summary>
+        /// 获取实体映射查询、更新、删除时的数据库字段参数的字符串（str默认为空）
+        /// </summary>
+        /// <typeparam name="T">实体泛型</typeparam>
+        /// <param name="entity"></param>
+        /// <returns>返回格式好的字符串</returns>
+        public string GetSetWhereStr<T>(T entity)
+        {
+            try
+            {
+                return GetSetWhereStr<T>(entity, string.Empty);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        #endregion
+
         /// <summary>
         /// 设置sql语句的参数
         /// </summary>

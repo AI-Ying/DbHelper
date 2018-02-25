@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
   Id="f35070c9-7434-4602-be3e-dd720b849157"
   name="DataBaseHelperUML" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -15171,7 +15171,7 @@
           </operation>
           <operation
             Id="ee1fbb77-30ed-434b-ac76-3e04e0032e42"
-            name="GetNewParameters&lt;T&gt;"
+            name="GetParameters&lt;T&gt;"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -15180,7 +15180,20 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="9cfac539-6aa7-4b3a-a135-76a610421546"
+                  Id="36e093e2-7859-46ea-92d9-d6b3805d4c3c"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="21d0f667-f6ce-47f1-869d-7f6f73e78791"
+                      LastKnownName="DbParameter[]"
+                      LastKnownLocation="DataBaseHelperUML.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="f21e8879-d2ff-4193-90ac-43739ceb114e"
                   name="entity"
                   direction="In"
                   isUnique="false">
@@ -15194,13 +15207,14 @@
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="36e093e2-7859-46ea-92d9-d6b3805d4c3c"
-                  direction="Return"
+                  Id="698dce48-93b5-4bbf-85ca-8088989e8137"
+                  name="str"
+                  direction="In"
                   isUnique="false">
                   <type_NamedElement>
                     <undefinedTypeMoniker
-                      Id="21d0f667-f6ce-47f1-869d-7f6f73e78791"
-                      LastKnownName="DbParameter[]"
+                      Id="8ccc68e7-0700-4da0-ae45-84d5b3963cd8"
+                      LastKnownName="string"
                       LastKnownLocation="DataBaseHelperUML.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -15459,6 +15473,171 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation
+            Id="91722d0e-d692-45e9-be36-6ff6ddb7971b"
+            name="GetFieldNameStr&lt;T&gt;"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="4a0a04c8-3636-467d-81f9-a259d84d0e3e"
+                  name="entity"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="62356435-8de9-4059-a494-f51c99a890b7"
+                      LastKnownName="T"
+                      LastKnownLocation="DataBaseHelperUML.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="fc4bbc7f-0a01-4754-a962-f18672fd455b"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="8ccc68e7-0700-4da0-ae45-84d5b3963cd8"
+                      LastKnownName="string"
+                      LastKnownLocation="DataBaseHelperUML.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="f607754b-7967-4582-a57a-9a632b52c819"
+            name="GetFieldValueStr&lt;T&gt;"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="ba21e8c2-a27c-48de-8a6a-084c39d0f4a5"
+                  name="entity"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="62356435-8de9-4059-a494-f51c99a890b7"
+                      LastKnownName="T"
+                      LastKnownLocation="DataBaseHelperUML.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="44ab3a80-a74f-4701-8334-89eb3bf43e09"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="8ccc68e7-0700-4da0-ae45-84d5b3963cd8"
+                      LastKnownName="string"
+                      LastKnownLocation="DataBaseHelperUML.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="8a84ba6f-742a-48e3-b248-0030ba0193b4"
+            name="GetSetWhereStr&lt;T&gt;"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="22f9b336-447e-4d50-bf37-518f9360000b"
+                  name="entity"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="62356435-8de9-4059-a494-f51c99a890b7"
+                      LastKnownName="T"
+                      LastKnownLocation="DataBaseHelperUML.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="22ab55db-086c-4684-bba5-09bf97a902ec"
+                  name="str"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="8ccc68e7-0700-4da0-ae45-84d5b3963cd8"
+                      LastKnownName="string"
+                      LastKnownLocation="DataBaseHelperUML.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="2671010c-3706-419e-bd3d-3ca5f88c8ea4"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="8ccc68e7-0700-4da0-ae45-84d5b3963cd8"
+                      LastKnownName="string"
+                      LastKnownLocation="DataBaseHelperUML.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="737ca9d4-1ffd-49c7-ae3a-e523bf6a62ac"
+            name="GetSetWhereStr&lt;T&gt;"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="379b6bb4-1da2-4c67-b08c-cfd6e796133d"
+                  name="entity"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="62356435-8de9-4059-a494-f51c99a890b7"
+                      LastKnownName="T"
+                      LastKnownLocation="DataBaseHelperUML.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e7685550-4227-41c1-9c05-c3b299280614"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="8ccc68e7-0700-4da0-ae45-84d5b3963cd8"
+                      LastKnownName="string"
+                      LastKnownLocation="DataBaseHelperUML.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
@@ -15578,6 +15757,11 @@
           </property>
         </ownedAttributes>
       </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="258441a7-4fe2-4434-8f54-f456b8aa28b2"
+        name="T " />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

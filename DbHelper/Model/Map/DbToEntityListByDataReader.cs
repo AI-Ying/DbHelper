@@ -22,9 +22,8 @@ namespace DataBaseHelper
             try
             {
                 List<T> list = new List<T>();
-                T entity = default(T);
-                Type entityType = entity.GetType();
-                PropertyInfo[] proInfo = entityType.GetProperties();
+                T entity = Activator.CreateInstance<T>();
+                PropertyInfo[] proInfo = entity.GetType().GetProperties();
                 while(reader.Read())
                 {
                     foreach (var p in proInfo)
