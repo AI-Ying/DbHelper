@@ -9,7 +9,7 @@ using System.Data.Common;
 
 namespace DataBaseHelper
 {
-    public partial class ConverData
+    public partial class ConverData : ConverDataHelper, IConverData
     {
         /// <summary>
         /// 把DataTable转换成实体类集合。
@@ -33,6 +33,7 @@ namespace DataBaseHelper
                 throw new Exception(e.Message);
             }
         }
+
         /// <summary>
         /// 把DataRow转换成实体类对象
         /// </summary>
@@ -64,7 +65,6 @@ namespace DataBaseHelper
                 throw new Exception(e.Message);
             }
         }
-
 
     }
 }

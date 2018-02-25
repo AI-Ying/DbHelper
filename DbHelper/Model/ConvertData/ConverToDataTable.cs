@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataBaseHelper
 {
-    public partial class ConverData : ConverDataCommon
+    public partial class ConverData : ConverDataHelper, IConverData
     {
         /// <summary>
         /// 把实体集合转换成DataTable类型
@@ -16,7 +13,7 @@ namespace DataBaseHelper
         /// <typeparam name="T">泛型实体</typeparam>
         /// <param name="list">实体集合</param>
         /// <returns>返回一个DataTable</returns>
-        public DataTable GetListDataTable<T>(List<T> list) where T : new()
+        public DataTable GetListDataTable<T>(List<T> list)
         {
             try
             {

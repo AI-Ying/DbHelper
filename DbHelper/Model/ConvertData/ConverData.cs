@@ -1,10 +1,12 @@
-﻿namespace DataBaseHelper
+﻿using System.Collections.Generic;
+using System.Data;
+
+namespace DataBaseHelper
 {
-    public abstract class ConverDataCommon : IDbHelper, IMapHelper
+    public class ConverDataHelper : IMapHelper, IDbHelper
     {
         public virtual MapHelper map { get { return new MapHelper(); } set { } }
         public virtual DbHelper db { get { return new DbHelper(); } set { } }
-        public abstract string JsonSerializer<T>(T obj);
 
     }
 }
