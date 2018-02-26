@@ -67,6 +67,10 @@
       <Name>DataBaseHelper</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Model\App.Config" />
+    <Content Include="Model\Sql\test.sql" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
