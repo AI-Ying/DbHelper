@@ -168,7 +168,7 @@ namespace DataBaseHelper
         /// </summary>
         /// <param name="dt"></param>
         /// <returns></returns>
-        public string JsonSerializeNonLib(DataTable dt)
+        public string JsonSerializerNonLib(DataTable dt)
         {
             try
             {

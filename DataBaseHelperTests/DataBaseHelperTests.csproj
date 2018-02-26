@@ -54,9 +54,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Model\Client\SqlClientTests.cs" />
+    <Compile Include="Model\ConvertData\ConverDataTests.cs" />
     <Compile Include="Model\EntityOperate\OperateTests.cs" />
+    <Compile Include="Model\EntityOperate\PageQuyeyMaxTopTests.cs" />
     <Compile Include="Model\Map\DbEntityMapTests.cs" />
-    <Compile Include="Model\Map\MapHelperTests.cs" />
     <Compile Include="Model\Entity\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

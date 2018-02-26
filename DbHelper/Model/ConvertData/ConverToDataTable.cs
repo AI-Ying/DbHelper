@@ -18,12 +18,18 @@ namespace DataBaseHelper
             try
             {
                 T entity = Activator.CreateInstance<T>();
+                PropertyInfo[] proInfo = entity.GetType().GetProperties();
                 DataTable dt = map.CreateDataTable<T>(entity.GetType());
                 if (list.Count > 0)
                 {
                     for (int i = 0; i < list.Count; i++)
                     {
-                        dt.Rows.Add(GetEntityDataRow<T>(entity));
+                        DataRow row = dt.NewRow();
+                        foreach (var p in proInfo)
+                        {
+                            row[p.Name] = p.GetValue(list[i]);
+                        }
+                        dt.Rows.Add(row);
                     }
                 }
                 return dt == null ? null : dt;
@@ -49,15 +55,13 @@ namespace DataBaseHelper
                 PropertyInfo[] proInfo = type.GetProperties();
                 foreach (var p in proInfo)
                 {
-                    string fieldName = map.GetFieldAttribute(p).FieldName;
-                    row[fieldName] = p.GetValue(entity);
+                    row[p.Name] = p.GetValue(entity);
                 }
                 return row;
             }
             catch (Exception e)
             {
-
-                throw;
+                throw e;
             }
         }
 

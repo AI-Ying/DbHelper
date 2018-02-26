@@ -21,15 +21,16 @@ namespace DataBaseHelper
         {
             try
             {
-                List<T> list = new List<T>();
-                T entity = Activator.CreateInstance<T>();
-                PropertyInfo[] proInfo = entity.GetType().GetProperties();
+                List<T> list = new List<T>();               
                 while(reader.Read())
                 {
+                    // 这个实例要放在while里面，这是个引用实例，再循环外修改会更改原来的值。
+                    T entity = Activator.CreateInstance<T>();
+                    PropertyInfo[] proInfo = entity.GetType().GetProperties();
                     foreach (var p in proInfo)
                     {
                         var fieldAttribute = map.GetFieldAttribute(p);
-                        p.SetValue(entity, reader[fieldAttribute.FieldName]);
+                        p.SetValue(entity, reader[fieldAttribute.FieldName], null);
                     }
                     list.Add(entity);
                 }

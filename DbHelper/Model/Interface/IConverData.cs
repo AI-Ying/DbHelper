@@ -10,7 +10,7 @@ namespace DataBaseHelper
 
         string JsonSerializerNonLib<T>(T entity);
         string JsonSerializerNonLib<T>(List<T> list);
-        string JsonSerializeNonLib(DataTable dt);
+        string JsonSerializerNonLib(DataTable dt);
         string JsonSerializerSys<T>(T obj);
         T JsonDeserializerSys<T>(string json) where T : class;
         string JsonSerializerNewtonsoft<T>(T obj);

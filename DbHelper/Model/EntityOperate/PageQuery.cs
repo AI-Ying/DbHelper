@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace DataBaseHelper
 {
-    class PageQuyeyMaxTop : IPageQuery
+    public class PageQuyeyMaxTop : IPageQuery
     {
         public MapHelper map { get { return new MapHelper(); } set { } }
         public DbHelper db { get { return new DbHelper(); } set { } }
@@ -33,7 +33,7 @@ namespace DataBaseHelper
         /// <param name="param">sql查询参数</param>
         /// <param name="where">sql查询条件</param>
         /// <returns>返回一个整型值：数据量</returns>
-        public int GetDataCount(string tableName, DbParameter[] param, string where)
+        private int GetDataCount(string tableName, DbParameter[] param, string where)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace DataBaseHelper
         /// <typeparam name="T">泛型实体</typeparam>
         /// <param name="entity">实体类型</param>
         /// <returns>返回一个DataTable</returns>
-        public DataTable GetPageData<T>(T entity)
+        private DataTable GetPageData<T>(T entity)
         {
             try
             {
@@ -134,7 +134,7 @@ namespace DataBaseHelper
         /// </summary>
         /// <typeparam name="T">泛型实体</typeparam>
         /// <returns>返回一个DataTable</returns>
-        public DataTable GetPageData<T>()
+        private DataTable GetPageData<T>()
         {
             try
             {
