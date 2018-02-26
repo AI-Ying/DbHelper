@@ -1056,18 +1056,8 @@
       </class>
     </logicalClassDesignerModelHasTypes>
     <packageHasNamedElement>
-      <referencedType Id="05e81d64-6a1e-4ed2-8071-40c08eb01e6e" name="void" isAbstract="false" isLeaf="false" cachedFullName="void">
-        <elementDefinition Id="94ba67dd-32de-4e8a-8bef-dd263dae4227" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <referencedType Id="957a3c08-2245-4a2b-8406-6d1a94ded43c" name="DbHelper" isAbstract="false" isLeaf="false" cachedFullName="DataBaseHelperUML::DbHelper">
         <elementDefinition Id="8cfac440-5e9f-427a-a1e4-19813df2372b" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <referencedType Id="e86e3ae5-2f37-4451-ac46-7c26a57877e1" name="List&lt;DbParameter&gt;" isAbstract="false" isLeaf="false" cachedFullName="List&lt;DbParameter&gt;">
-        <elementDefinition Id="3cebfdac-1f27-4a90-812f-1cc0fd8a49f9" />
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -1153,18 +1143,6 @@
             <elementDefinition Id="29d9b7f6-0994-4d83-80e4-cbcfbb12b5dd" />
             <type_NamedElement>
               <referencedTypeMoniker Id="957a3c08-2245-4a2b-8406-6d1a94ded43c" LastKnownName="DbHelper" />
-            </type_NamedElement>
-          </property>
-          <property Id="5a7762b6-1c41-450f-b830-199eedd9504c" name="Param" isLeaf="false" isStatic="false" isReadOnly="true" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-            <elementDefinition Id="d88e5704-456c-4fe3-aa58-c01a3f35a09e" />
-            <type_NamedElement>
-              <referencedTypeMoniker Id="54caf45a-9680-475a-937e-8d911212a837" LastKnownName="DbParameter[]" />
-            </type_NamedElement>
-          </property>
-          <property Id="7ace39fa-2363-423d-ae77-840b187b7b25" name="ParamList" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-            <elementDefinition Id="ef9fc044-eefe-4916-9235-d0fe7ad4fe6d" />
-            <type_NamedElement>
-              <referencedTypeMoniker Id="e86e3ae5-2f37-4451-ac46-7c26a57877e1" LastKnownName="List&lt;DbParameter&gt;" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
@@ -1290,29 +1268,6 @@
                   <elementDefinition Id="f0a0e939-e948-412f-b08b-8ddc0139a2e8" />
                   <type_NamedElement>
                     <referencedTypeMoniker Id="54caf45a-9680-475a-937e-8d911212a837" LastKnownName="DbParameter[]" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="ca2bbaff-e744-4b76-a459-76c7b4a32241" name="SetParameter" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="b3def7f7-2357-40a1-8cb9-566730329f44" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="bd730f8f-765f-4d02-8691-92f4da26f6e1" name="string parString" direction="In" isUnique="false">
-                  <elementDefinition Id="88b9d769-fa55-4550-9995-5fa138f98729" />
-                </parameter>
-              </operationHasOwnedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="34b69092-e066-4f7a-b2f1-3a0499ef8d39" name="object value" direction="In" isUnique="false">
-                  <elementDefinition Id="1df28cde-db57-4602-8db3-bab8f6ebe7e1" />
-                </parameter>
-              </operationHasOwnedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="14b0b399-3d8b-4887-b50e-5a64bcb45e92" direction="Return" isUnique="false">
-                  <elementDefinition Id="dec78c05-6606-4bf9-bf4c-4235332c1edf" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="05e81d64-6a1e-4ed2-8071-40c08eb01e6e" LastKnownName="void" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>

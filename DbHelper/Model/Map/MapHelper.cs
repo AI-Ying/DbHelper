@@ -12,8 +12,6 @@ namespace DataBaseHelper
     public class MapHelper : IDbHelper
     {
         public DbHelper db { get { return new DbHelper(); } set { } }
-        public List<DbParameter> ParamList { get; set; }
-        public DbParameter[] Param { get { return ParamList.ToArray(); } }
 
 
         /// <summary>
@@ -265,25 +263,6 @@ namespace DataBaseHelper
 
         #endregion
 
-        /// <summary>
-        /// 设置sql语句的参数
-        /// </summary>
-        /// <param name="parString">参数名</param>
-        /// <param name="value">参数值</param>
-        public void SetParameter(string parString, object value)
-        {
-            try
-            {
-                DbParameter par = db.Factory.CreateParameter();
-                par.ParameterName = $"@{parString}";
-                par.Value = value;
-                ParamList.Add(par);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
         /// <summary>
         /// 根据实体，映射DataTable架构
         /// </summary>

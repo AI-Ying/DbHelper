@@ -55,6 +55,30 @@ namespace DataBaseHelper
             }
         }
         /// <summary>
+        /// 批量插入相应的实体到数据库中
+        /// </summary>
+        /// <typeparam name="T">实体泛型</typeparam>
+        /// <param name="list">实体集合</param>
+        /// <returns>返回插入数据成功的行数</returns>
+        public int AddRange<T>(List<T> list) where T : class
+        {
+            try
+            {
+                int sum = 0;
+                foreach (var item in list)
+                {
+                    T entity = item as T;
+                    int result = Add(entity);
+                    sum += result;
+                }
+                return sum;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        /// <summary>
         /// 把实体转换成相对应的sql删除语句字符串
         /// </summary>
         /// <typeparam name="T">实体泛型</typeparam>
