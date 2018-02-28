@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataBaseHelperTests.Model;
+using log4net;
+using log4net.Config;
 
 namespace DataBaseHelper.Tests
 {
@@ -16,7 +18,7 @@ namespace DataBaseHelper.Tests
         public void AddTest()
         {
             Operate oper = new Operate();
-            int result = oper.Add(new Student() { ID = 2, Age = 18, Name = "Park" });
+            int result = oper.Add(new Student{ ID = 2, Age = 18, Name = "Park" });
             Assert.AreEqual(1, result);
         }
 
@@ -41,7 +43,7 @@ namespace DataBaseHelper.Tests
         {
             Operate opre = new Operate();
             int result = opre.Update(new Student { Name = "AI" }, new Student { Name = "Park" });
-            Assert.AreEqual(result, 1);
+            Assert.AreEqual(1, result);
         }
 
         [TestMethod()]

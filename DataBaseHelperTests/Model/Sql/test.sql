@@ -3,9 +3,9 @@ Create DataBase DBProvider;
 
 use DBProvider;
 
-
+--创建学生表
 CREATE TABLE [dbo].[Student](
-	[id] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	[Id] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	[StuID] [int] NOT NULL,
 	[StuAge] [int] NOT NULL,
 	[StuName] [varchar](50) NOT NULL
@@ -28,3 +28,14 @@ Insert Student(StuID, StuAge, StuName) values(14, 21, 'Martin');
 Insert Student(StuID, StuAge, StuName) values(15, 20, 'Betty');
 
 select * from Student;
+
+--创建日志表
+CREATE TABLE [dbo].[Log] (  
+    [Id] [int] IDENTITY (1, 1) NOT NULL PRIMARY KEY,  
+    [Date] [datetime] NOT NULL,  
+    [Thread] [varchar] (255) NOT NULL,  
+    [Level] [varchar] (50) NOT NULL,  
+    [Logger] [varchar] (255) NOT NULL,  
+    [Message] [varchar] (4000) NOT NULL,  
+    [Exception] [varchar] (2000) NULL  
+);  
