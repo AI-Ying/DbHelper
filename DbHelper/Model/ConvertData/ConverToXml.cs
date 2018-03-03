@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace DataBaseHelper
@@ -31,6 +28,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("Xml序列化失败", e);
                 throw e;
             }
         }
@@ -53,6 +51,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("Xml反序列化失败", e);
                 throw e;
             }
         }

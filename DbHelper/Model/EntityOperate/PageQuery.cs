@@ -102,6 +102,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("带有条件的分页查询失败", e);
                 throw new Exception(e.Message);
             }
         }
@@ -171,7 +172,7 @@ namespace DataBaseHelper
         /// </summary>
         /// <typeparam name="T">泛型实体</typeparam>
         /// <returns>返回一个DataTable</returns>
-        public DataTable QueryNonWhere<T>()
+        public DataTable QueryNonWhere<T>() 
         {
             try
             {
@@ -180,6 +181,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("不带条件的分页查询失败", e);
                 throw new Exception(e.Message);
             }
         }

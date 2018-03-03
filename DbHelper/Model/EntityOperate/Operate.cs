@@ -51,6 +51,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("添加实体信息失败", e);
                 throw e;
             }
         }
@@ -75,6 +76,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("批量添加实体信息失败", e);
                 throw e;
             }
         }
@@ -118,6 +120,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("删除实体信息失败", e);
                 throw e;
             }
         }
@@ -156,12 +159,13 @@ namespace DataBaseHelper
                 List<DbParameter> paramTable = map.GetTableNameParameters<T>().ToList();
                 List<DbParameter> paramWhere = map.GetParameters(entity).ToList();
                 paramTable.AddRange(paramWhere);
-                DbParameter[] param = paramTable.ToArray();        
+                DbParameter[] param = paramTable.ToArray(); 
                 DbEntityMap entityMap = new DbEntityMap();
                 return entityMap.GetReaderList<T>(sql, param);
             }
             catch (Exception e)
             {
+                Log.Error("查询实体信息失败", e);
                 throw e;
             }
         }
@@ -210,6 +214,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("更新实体信息失败", e);
                 throw e;
             }
         }

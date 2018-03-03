@@ -17,8 +17,9 @@ namespace DataBaseHelper.Tests
         [TestMethod()]
         public void AddTest()
         {
+            Log.Info("添加信息测试");
             Operate oper = new Operate();
-            int result = oper.Add(new Student{ ID = 2, Age = 18, Name = "Park" });
+            int result = oper.Add(new Student{ ID = 100, Age = 18, Name = "Park" });
             Assert.AreEqual(1, result);
         }
 
@@ -26,7 +27,7 @@ namespace DataBaseHelper.Tests
         public void DeleteTest()
         {
             Operate oper = new Operate();
-            int result = oper.Delete(new Student() { ID = 2 });
+            int result = oper.Delete(new Student() { ID = 100 });
             Assert.AreEqual(1, result);
         }
 
@@ -34,7 +35,8 @@ namespace DataBaseHelper.Tests
         public void QueryTest()
         {
             Operate oper = new Operate();
-            List<Student> list = oper.Query(new Student() { ID = 2 });
+            Log.Info("查询测试");  
+            List<Student> list = oper.Query(new Student() { ID = 100 });
             Assert.AreEqual(list[0].Name, "Park");
         }
 

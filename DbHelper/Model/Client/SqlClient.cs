@@ -80,6 +80,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("根据sql语句查询数据库转成实体集合失败", e);
                 throw e;
             }
         }
@@ -98,6 +99,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("根据sql语句查询数据库转成实体集合失败", e);
                 throw e;
             }
         }
@@ -117,6 +119,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("根据Sql语句查询数据库转换成对应的DataTable失败", e);
                 throw e;
             }
         }
@@ -135,6 +138,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("根据Sql语句查询数据库转换成对应的DataTable失败", e);
                 throw e;
             }
         }
@@ -165,6 +169,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("根据sql语句增、删、改、查数据库失败", e);
                 throw e;
             }  
         }
@@ -182,6 +187,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("根据sql语句增、删、改、查数据库失败", e);
                 throw e;
             }
         }

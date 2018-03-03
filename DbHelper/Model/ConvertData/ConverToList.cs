@@ -30,6 +30,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("DataTable转成实体类集合失败", e);
                 throw new Exception(e.Message);
             }
         }
@@ -62,6 +63,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("DataRow转成实体类集合失败", e);
                 throw new Exception(e.Message);
             }
         }

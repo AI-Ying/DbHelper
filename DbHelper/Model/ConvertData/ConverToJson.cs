@@ -143,6 +143,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("不使用库Json序列化失败", e);
                 throw new Exception(e.Message);
             }
         }
@@ -160,6 +161,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("不使用库Json序列化失败", e);
                 throw new Exception(e.Message);
             }
         }
@@ -176,6 +178,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("不使用库Json序列化失败", e);
                 throw new Exception(e.Message);
             }
         }
@@ -204,6 +207,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("使用MS库Json序列化失败", e);
                 throw new Exception(e.Message);
             }
         }
@@ -226,6 +230,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("使用MS库Json反序列化失败", e);
                 throw new Exception(e.Message);
             }
         }
@@ -247,6 +252,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("使用Newtonsoft库Json序列化失败", e);
                 throw e;
             }
         }
@@ -264,6 +270,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Error("使用Newtonsoft库Json反序列化失败", e);
                 throw e;
             }
         }
