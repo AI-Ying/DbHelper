@@ -642,6 +642,18 @@
               <referencedTypeMoniker Id="904e466d-424d-480c-9365-7a82a9d9d3da" LastKnownName="DbCommand" />
             </type_NamedElement>
           </property>
+          <property Id="463337dc-1566-40c8-b01f-4efbfe8d8dbd" name="slaveConnectionStrings" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="d5f41bb5-9c1f-4cd0-8a15-d4847fc2641c" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="d2048858-5a3d-43eb-b58e-62714a3dc099" LastKnownName="List&lt;string&gt;" />
+            </type_NamedElement>
+          </property>
+          <property Id="67d24521-0605-49d0-88cd-5248956e0a2b" name="SlaveConnection" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ac025cec-002d-483e-a388-2a55ac3a64f1" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="778e4300-7622-4fbf-aa93-ea368fb65678" LastKnownName="List&lt;DbConnection&gt;" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation Id="44f1776c-ebd8-415b-91f7-0e6aa07720bf" name="DbHelper" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
@@ -2201,16 +2213,6 @@
         <elementDefinition Id="62eb20d6-f021-4cf3-bb7d-8da014afe861" />
       </Interface>
     </logicalClassDesignerModelHasTypes>
-    <packageHasNamedElement>
-      <referencedType Id="02dc8769-500e-40a5-9c0e-758a490e720e" name="string" isAbstract="false" isLeaf="false" cachedFullName="string">
-        <elementDefinition Id="8ccc68e7-0700-4da0-ae45-84d5b3963cd8" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <referencedType Id="fb8e0d8d-140b-4e01-9ec3-70b0327db40f" name="string" isAbstract="false" isLeaf="false" cachedFullName="string">
-        <elementDefinition Id="8ccc68e7-0700-4da0-ae45-84d5b3963cd8" />
-      </referencedType>
-    </packageHasNamedElement>
     <logicalClassDesignerModelHasTypes>
       <class Id="17e840bb-c983-4420-b7a1-958c5f7974bc" name="DbConfig" isAbstract="false" isLeaf="false" isActiveClass="false">
         <appliedStereotypesInternal>
@@ -2252,7 +2254,7 @@
         </appliedStereotypesInternal>
         <elementDefinition Id="5888b002-91f3-4ccb-88bd-c49ea14f5385" />
         <ownedAttributesInternal>
-          <property Id="aa4ee665-7dce-4793-84f2-efd0837e4e8e" name="ConnectionString" isLeaf="false" isStatic="true" isReadOnly="true" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="aa4ee665-7dce-4793-84f2-efd0837e4e8e" name="ConnectionStrings" isLeaf="false" isStatic="true" isReadOnly="true" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <appliedStereotypesInternal>
               <stereotypeInstance Id="c0b8b854-2266-4b10-90fd-87743511be6b" name="property" profile="CSharpProfile">
                 <elementDefinition Id="480322d6-a16b-4394-940c-d5a537c25935" />
@@ -2304,10 +2306,10 @@
             </appliedStereotypesInternal>
             <elementDefinition Id="d93efdfa-6433-4ca0-be0b-21da3a82a97a" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="02dc8769-500e-40a5-9c0e-758a490e720e" LastKnownName="string" />
+              <referencedTypeMoniker Id="ab23d718-4d24-4bcc-99e3-f531b1290063" LastKnownName="string" />
             </type_NamedElement>
           </property>
-          <property Id="53875c7d-8553-4698-97f6-5b621e94e773" name="ProviderName" isLeaf="false" isStatic="true" isReadOnly="true" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="53875c7d-8553-4698-97f6-5b621e94e773" name="ProviderNames" isLeaf="false" isStatic="true" isReadOnly="true" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <appliedStereotypesInternal>
               <stereotypeInstance Id="b3b896ee-8de1-4a25-ae39-ba78163c0e69" name="property" profile="CSharpProfile">
                 <elementDefinition Id="dc3d0a3b-abc4-4b1d-94fd-6c7aec9ce243" />
@@ -2359,12 +2361,32 @@
             </appliedStereotypesInternal>
             <elementDefinition Id="23c4eb19-c76a-4a8e-a0a0-73940a7b03a0" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="fb8e0d8d-140b-4e01-9ec3-70b0327db40f" LastKnownName="string" />
+              <referencedTypeMoniker Id="73516329-6a4d-4031-a87b-d93df6ab3261" LastKnownName="string" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="ab23d718-4d24-4bcc-99e3-f531b1290063" name="string" isAbstract="false" isLeaf="false" cachedFullName="string">
+        <elementDefinition Id="8ccc68e7-0700-4da0-ae45-84d5b3963cd8" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="73516329-6a4d-4031-a87b-d93df6ab3261" name="string" isAbstract="false" isLeaf="false" cachedFullName="string">
+        <elementDefinition Id="8ccc68e7-0700-4da0-ae45-84d5b3963cd8" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="d2048858-5a3d-43eb-b58e-62714a3dc099" name="List&lt;string&gt;" isAbstract="false" isLeaf="false" cachedFullName="List&lt;string&gt;">
+        <elementDefinition Id="06b7a7b3-2934-4a2b-9f14-e42edd9d4d45" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="778e4300-7622-4fbf-aa93-ea368fb65678" name="List&lt;DbConnection&gt;" isAbstract="false" isLeaf="false" cachedFullName="List&lt;DbConnection&gt;">
+        <elementDefinition Id="7fd32ab4-bbba-46ae-9492-d7d6833a5a30" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="146c9c2c-d5bc-4134-8e46-4cb4cb5e72b4" name="DataBaseHelperUML">
     <elementDefinition Id="f35070c9-7434-4602-be3e-dd720b849157" />

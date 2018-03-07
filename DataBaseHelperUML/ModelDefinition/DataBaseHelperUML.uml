@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
   Id="f35070c9-7434-4602-be3e-dd720b849157"
   name="DataBaseHelperUML" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -7420,6 +7420,44 @@
                 LastKnownLocation="DataBaseHelperUML.uml" />
             </type_NamedElement>
           </property>
+          <property
+            Id="d5f41bb5-9c1f-4cd0-8a15-d4847fc2641c"
+            name="slaveConnectionStrings"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="06b7a7b3-2934-4a2b-9f14-e42edd9d4d45"
+                LastKnownName="List&lt;string&gt;"
+                LastKnownLocation="DataBaseHelperUML.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="ac025cec-002d-483e-a388-2a55ac3a64f1"
+            name="SlaveConnection"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="7fd32ab4-bbba-46ae-9492-d7d6833a5a30"
+                LastKnownName="List&lt;DbConnection&gt;"
+                LastKnownLocation="DataBaseHelperUML.uml" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
@@ -12351,7 +12389,7 @@
         <ownedAttributesInternal>
           <property
             Id="d93efdfa-6433-4ca0-be0b-21da3a82a97a"
-            name="ConnectionString"
+            name="ConnectionStrings"
             isLeaf="false"
             isStatic="true"
             isReadOnly="true"
@@ -12426,7 +12464,7 @@
           </property>
           <property
             Id="23c4eb19-c76a-4a8e-a0a0-73940a7b03a0"
-            name="ProviderName"
+            name="ProviderNames"
             isLeaf="false"
             isStatic="true"
             isReadOnly="true"
@@ -18439,6 +18477,16 @@
       <undefinedType
         Id="eacc2fe0-839b-4459-9c84-3e20a376028f"
         name="enum" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="06b7a7b3-2934-4a2b-9f14-e42edd9d4d45"
+        name="List&lt;string&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="7fd32ab4-bbba-46ae-9492-d7d6833a5a30"
+        name="List&lt;DbConnection&gt;" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

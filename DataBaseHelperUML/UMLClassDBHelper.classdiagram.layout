@@ -5,7 +5,7 @@
     <classShape Id="9219070c-e8ef-4f38-b39f-23972ec11042" absoluteBounds="2.125, 3.25, 3.625, 1.0903059895833334" hideQualifiedName="false" increaseHeight="0.20650390625" customColor="181, 193, 223">
       <classMoniker Id="8b3f5186-ec71-4681-9e92-c13a41fbf651" LastKnownName="DbHelper" />
       <nestedChildShapes>
-        <AttributeElementListCompartment Id="63c16b0f-abc3-48a2-9e83-6466442ff0d2" isExpanded="false" absoluteBounds="2.14, 3.777669270833333, 3.5949999999999998, 0.226318359375" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <AttributeElementListCompartment Id="63c16b0f-abc3-48a2-9e83-6466442ff0d2" isExpanded="false" absoluteBounds="2.14, 3.7776692708333335, 3.5949999999999998, 0.226318359375" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
         <OperationElementListCompartment Id="9c23df03-0074-4b23-b8e4-923ed505e279" isExpanded="false" absoluteBounds="2.14, 4.0139876302083337, 3.5949999999999998, 0.226318359375" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>

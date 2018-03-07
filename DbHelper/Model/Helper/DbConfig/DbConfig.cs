@@ -1,24 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataBaseHelper
 {
     public static class DbConfig
     {
-        private static string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        private static string providerName = ConfigurationManager.ConnectionStrings["ConnectionString"].ProviderName;
-        public static string ConnectionString
+        public static List<string> ConnectionStrings
         {
-            get { return connectionString; }
+            get
+            {
+                List<string> connectionStrings = new List<string>();
+                for (int i = 1; i < ConfigurationManager.ConnectionStrings.Count; i++)
+                {
+                    connectionStrings.Add(ConfigurationManager.ConnectionStrings[i].ConnectionString);
+                }
+                return connectionStrings;
+            }
         }
-        public static string ProviderName
+        public static List<string> ProviderNames
         {
-            get { return providerName; }
+            get
+            {
+                List<string> providerNames = new List<string>();
+                for (int i = 1; i < ConfigurationManager.ConnectionStrings.Count; i++)
+                {
+                    providerNames.Add(ConfigurationManager.ConnectionStrings[i].ProviderName);
+                }
+                return providerNames;
+            }
         }
-
     }
 }

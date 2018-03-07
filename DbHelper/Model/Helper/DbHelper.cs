@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 
@@ -8,7 +9,15 @@ namespace DataBaseHelper
     {
         #region Properties
 
-        public string ConnectionString { get; set; }
+        /// <summary>
+        /// 从连接数据库字符串集合
+        /// </summary>
+        List<string> slaveConnectionStrings = new List<string>();
+        /// <summary>
+        /// 从连接数据库连接
+        /// </summary>
+        List<DbConnection> SlaveConnection = new List<DbConnection>();
+        public string ConnectionString { get; set; }       
         public string ProviderName { get; set; }
         public DbProviderFactory Factory { get; set; }
         public DbConnection Connection { get; set; }
@@ -19,12 +28,31 @@ namespace DataBaseHelper
         #endregion
 
         #region Constructor
-
+        
+        /// <summary>
+        /// 初始化数据库连接
+        /// </summary>
         public DbHelper()
         {
-            ConnectionString = DbConfig.ConnectionString;
-            ProviderName = DbConfig.ProviderName;
-            CreateFactory();
+            try
+            {
+                List<string> conStr = DbConfig.ConnectionStrings;
+                ConnectionString = conStr[0];
+                ProviderName = DbConfig.ProviderNames[0];
+                if (DbConfig.ConnectionStrings.Count > 1)
+                {
+                    conStr.RemoveAt(0);
+                    slaveConnectionStrings.AddRange(conStr);
+                }
+                CreateFactory();
+                Log.Info("打开数据库连接");
+            }
+            catch (Exception e)
+            {
+                Log.Error("数据库打开失败", e);
+                throw e;
+            }
+            
         }
 
         #endregion
@@ -42,21 +70,42 @@ namespace DataBaseHelper
             }
             Factory = DbProviderFactories.GetFactory(ProviderName);
         }
+
         /// <summary>
         /// 获取一个已打开的连接
         /// </summary>
+        /// <param name="isMaster">是否开启主从模式</param>
         /// <returns></returns>
-        public DbConnection GetConnection()
+        public DbConnection GetConnection(bool isMaster)
         {
             try
             {
-                Connection = Factory.CreateConnection();
-                Connection.ConnectionString = ConnectionString;
-                if (Connection.State == ConnectionState.Closed)
+                if (isMaster)
                 {
-                    Connection.Open();
+                    Connection = Factory.CreateConnection();
+                    Connection.ConnectionString = ConnectionString;
+                    if (Connection.State == ConnectionState.Closed)
+                    {
+                        Connection.Open();
+                    }
+                    return Connection;
                 }
-                return Connection;
+                else
+                {
+                    foreach (var item in slaveConnectionStrings)
+                    {
+                        DbConnection conn = Factory.CreateConnection();
+                        conn.ConnectionString = item;
+                        if (conn.State == ConnectionState.Closed)
+                        {
+                            conn.Open();
+                        }
+                        SlaveConnection.Add(conn);
+                    }
+                    var count = SlaveConnection.Count;
+                    Connection = SlaveConnection[new Random().Next(0, count - 1)];
+                    return Connection;
+                }
             }
             catch (Exception e)
             {
@@ -90,7 +139,7 @@ namespace DataBaseHelper
             {
                 if (Connection == null)
                 {
-                    Connection = GetConnection();
+                    Connection = GetConnection(true);
                 }
                 Transaction = Connection.BeginTransaction();
                 IsBeginTransaction = true;
@@ -165,7 +214,7 @@ namespace DataBaseHelper
                 }
                 else
                 {
-                    Connection = GetConnection();
+                    Connection = GetConnection(false);
                     Command = Connection.CreateCommand();
                     Command.CommandText = sql;
                     Command.CommandType = cmdType;
@@ -190,9 +239,11 @@ namespace DataBaseHelper
         {
             try
             {
+                BeginTransaction();
                 using (DbCommand command = GetCommand(sql, cmdType, param))
                 {
                     int result = command.ExecuteNonQuery();
+                    CommitTransaction();
                     ClearParameters();
                     return result;
                 }
