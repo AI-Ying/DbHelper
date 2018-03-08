@@ -44,6 +44,10 @@ namespace DataBaseHelper
                     conStr.RemoveAt(0);
                     slaveConnectionStrings.AddRange(conStr);
                 }
+                else
+                {
+                    slaveConnectionStrings.AddRange(conStr);
+                }
                 CreateFactory();
                 Log.Info("打开数据库连接");
             }

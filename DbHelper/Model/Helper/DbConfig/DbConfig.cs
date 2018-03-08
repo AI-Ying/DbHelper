@@ -22,7 +22,7 @@ namespace DataBaseHelper
             get
             {
                 List<string> providerNames = new List<string>();
-                for (int i = 1; i < ConfigurationManager.ConnectionStrings.Count; i++)
+                for (int i = 1  ; i < ConfigurationManager.ConnectionStrings.Count; i++)
                 {
                     providerNames.Add(ConfigurationManager.ConnectionStrings[i].ProviderName);
                 }

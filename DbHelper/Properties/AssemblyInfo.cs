@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("DbHelper")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("DbHelper.AI.Ying")]
+[assembly: AssemblyDescription("DataSSM")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("Ying")]
 [assembly: AssemblyProduct("DbHelper")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2018")]
+[assembly: AssemblyCopyright("Copyright © AI")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

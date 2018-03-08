@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$AIYing</id>
+    <version>1.0.0.0</version>
+    <title>DbHelper.AI.Ying</title>
+    <authors>AI</authors>
+    <owners>AI</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>DataSSM</description>
+    <releaseNotes>Firt push</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+  </metadata>
+</package>
