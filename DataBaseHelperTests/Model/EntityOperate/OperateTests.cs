@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using DataBaseHelperTests.Model;
 using log4net;
 using log4net.Config;
+using DataBaseHelperTests.Model.Entity;
 
 namespace DataBaseHelper.Tests
 {
@@ -35,9 +36,11 @@ namespace DataBaseHelper.Tests
         public void QueryTest()
         {
             Operate oper = new Operate();
-            Log.Info("查询测试");  
-            List<Student> list = oper.Query(new Student() { ID = 100 });
-            Assert.AreEqual(list[0].Name, "Park");
+            Log.Info("查询测试");
+            //List<Student> list = oper.Query(new Student() { ID = 100 });
+            //Assert.AreEqual(list[0].Name, "Park");
+            var list = oper.Query(new User() { UserName="ai", UserPassword="xuan"});
+            Assert.AreEqual(list[0].UserName, "ai");
         }
 
         [TestMethod()]

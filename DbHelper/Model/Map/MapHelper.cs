@@ -180,7 +180,7 @@ namespace DataBaseHelper
                         fieldNameStr.Append($"{properAttribute.FieldName},");
                     }
                 }
-                return fieldNameStr.ToString().TrimEnd(',');
+                return fieldNameStr.ToString().Remove(fieldNameStr.ToString().Length - 1, 1);
             }
             catch (Exception e)
             {
@@ -208,7 +208,7 @@ namespace DataBaseHelper
                         fieldValueStr.Append($"@{properAttribute.FieldName},");
                     }
                 }
-                return fieldValueStr.ToString().TrimEnd(',');
+                return fieldValueStr.ToString().Remove(fieldValueStr.ToString().Length - 1, 1);
             }
             catch (Exception e)
             {
@@ -236,7 +236,7 @@ namespace DataBaseHelper
                         whereStr.Append($"{properAttribute.FieldName}=@{str}{properAttribute.FieldName} and ");
                     }
                 }
-                return whereStr.ToString().TrimEnd("and ".ToCharArray());
+                return whereStr.ToString().Remove(whereStr.ToString().Length - 4, 4);
             }
             catch (Exception e)
             {

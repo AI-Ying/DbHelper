@@ -64,6 +64,7 @@
     <Compile Include="Model\ConvertData\ConverDataTests.cs" />
     <Compile Include="Model\EntityOperate\OperateTests.cs" />
     <Compile Include="Model\EntityOperate\PageQuyeyMaxTopTests.cs" />
+    <Compile Include="Model\Entity\User.cs" />
     <Compile Include="Model\Helper\DbHelperTests.cs" />
     <Compile Include="Model\Map\DbEntityMapTests.cs" />
     <Compile Include="Model\Entity\Student.cs" />
