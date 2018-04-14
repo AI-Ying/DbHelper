@@ -2,14 +2,15 @@
 <package >
   <metadata>
     <id>$id$AIYing</id>
-    <version>1.0.0.1</version>
+    <version>1.0.0.2-alpha</version>
     <title>DbHelper.AI.Ying</title>
     <authors>AI</authors>
     <owners>AI</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
+    <projectUrl>https://github.com/AI-Ying/DbHelper</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>DataSSM</description>
-    <releaseNotes>优化主从分离</releaseNotes>
+    <releaseNotes>解决字符串Bug</releaseNotes>
     <copyright>Copyright 2018</copyright>
   </metadata>
 </package>

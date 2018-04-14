@@ -49,9 +49,9 @@ namespace DataBaseHelper
                 {
                     return default(int);
                 }
-                else if (type == typeof(double))
+                else if (type == typeof(float))
                 {
-                    return default(double);
+                    return default(float);
                 }
                 else if (type == typeof(string))
                 {
