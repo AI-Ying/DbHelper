@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace DataBaseHelper
 {
-    public partial class DbEntityMap : IDbHelper, IDisposable
+    public partial class DbEntityMap : IDbHelper
     {
         public MapHelper map { get { return new MapHelper(); } set { } }
         public DbHelper db { get { return new DbHelper(); } set { } }
@@ -78,15 +78,6 @@ namespace DataBaseHelper
             catch (Exception e)
             {
                 throw new Exception(e.Message);
-            }
-        }
-
-        public void Dispose()
-        {
-            if (db != null & map != null)
-            {
-                db.Dispose();
-                map.Dispose();
             }
         }
     }
