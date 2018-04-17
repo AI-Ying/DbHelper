@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace DataBaseHelper
 {
-    public partial class DbEntityMap : IDbHelper, IMapHelper
+    public partial class DbEntityMap : IMapHelper
     {
 
         /// <summary>

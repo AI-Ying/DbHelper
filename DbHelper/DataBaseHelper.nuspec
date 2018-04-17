@@ -1,8 +1,8 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <package >
   <metadata>
     <id>$id$AIYing</id>
-    <version>1.0.0.2-alpha</version>
+    <version>1.0.0.3-alpha</version>
     <title>DbHelper.AI.Ying</title>
     <authors>AI</authors>
     <owners>AI</owners>
@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/AI-Ying/DbHelper</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>DataSSM</description>
-    <releaseNotes>解决字符串Bug</releaseNotes>
+    <releaseNotes>优化</releaseNotes>
     <copyright>Copyright 2018</copyright>
   </metadata>
 </package>

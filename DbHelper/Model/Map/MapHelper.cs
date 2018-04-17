@@ -287,6 +287,5 @@ namespace DataBaseHelper
                 throw new Exception(e.Message);
             }
         }
-
     }
 }

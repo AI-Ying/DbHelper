@@ -10,7 +10,7 @@ using DataBaseHelper;
 
 namespace DataBaseHelper
 {
-    public class SqlClient : IDbHelper 
+    public class SqlClient : IDbHelper, IDisposable
     {
         public DbHelper db { get { return new DbHelper(); } set { } }
         public DbEntityMap dbMap { get { return new DbEntityMap(); } set { } }
@@ -189,6 +189,14 @@ namespace DataBaseHelper
             {
                 Log.Error("根据sql语句增、删、改、查数据库失败", e);
                 throw e;
+            }
+        }
+
+        public void Dispose()
+        {
+            if (ParamList.Count>0)
+            {
+                ParamList.Clear();
             }
         }
     }
