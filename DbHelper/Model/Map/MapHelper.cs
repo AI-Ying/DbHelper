@@ -69,6 +69,10 @@ namespace DataBaseHelper
                 {
                     return default(bool);
                 }
+                else if (type == typeof(double))
+                {
+                    return default(double);
+                }
                 else
                 {
                     return default(Guid);
