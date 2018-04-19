@@ -38,7 +38,7 @@ namespace DataBaseHelper
         /// <typeparam name="T">泛型实体</typeparam>
         /// <param name="entity"></param>
         /// <returns>返回插入数据影响的行数</returns>
-        public int Add<T>(T entity) 
+        public int Add<T>(T entity)
         {
             try
             {
@@ -151,7 +151,7 @@ namespace DataBaseHelper
         /// <typeparam name="T">实体泛型</typeparam>
         /// <param name="entity"></param>
         /// <returns>返回一个实体类型的结果集</returns>
-        public List<T> Query<T>(T entity) 
+        public List<T> Query<T>(T entity)
         {
             try
             {
@@ -159,7 +159,48 @@ namespace DataBaseHelper
                 List<DbParameter> paramTable = map.GetTableNameParameters<T>().ToList();
                 List<DbParameter> paramWhere = map.GetParameters(entity).ToList();
                 paramTable.AddRange(paramWhere);
-                DbParameter[] param = paramTable.ToArray(); 
+                DbParameter[] param = paramTable.ToArray();
+                DbEntityMap entityMap = new DbEntityMap();
+                return entityMap.GetReaderList<T>(sql, param);
+            }
+            catch (Exception e)
+            {
+                Log.Error("查询实体信息失败", e);
+                throw e;
+            }
+        }
+        /// <summary>
+        /// 把实体转换成相对应的sql查询语句字符串
+        /// </summary>
+        /// <typeparam name="T">实体泛型</typeparam>
+        /// <param name="entity"></param>
+        /// <returns>返回格式化好的sql查询语句</returns>
+        private string QuerySqlStringNoWhere<T>(T entity)
+        {
+            try
+            {
+                // Select * from Student Where StuID = @StuID
+                string tableName = map.GetTableName(entity.GetType());
+                string sql = $"Select * from {tableName};";
+                return sql;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        /// <summary>
+        /// 查询某一个实体的全部数据
+        /// </summary>
+        /// <typeparam name="T">实体泛型</typeparam>
+        /// <returns>返回一个实体类型的结果集</returns>
+        public List<T> Query<T>()
+        {
+            try
+            {
+                T entity = Activator.CreateInstance<T>();
+                string sql = QuerySqlStringNoWhere(entity);
+                DbParameter[] param = map.GetTableNameParameters<T>();
                 DbEntityMap entityMap = new DbEntityMap();
                 return entityMap.GetReaderList<T>(sql, param);
             }
@@ -185,7 +226,7 @@ namespace DataBaseHelper
                 string setStr = map.GetSetWhereStr(entity, "New");
                 string whereStr = map.GetSetWhereStr(prerequisite);
                 string sql = $"Update {tableName} Set {setStr} where {whereStr};";
-                return sql;                 
+                return sql;
             }
             catch (Exception e)
             {
@@ -199,7 +240,7 @@ namespace DataBaseHelper
         /// <param name="entity"></param>
         /// <param name="prerequisite"></param>
         /// <returns>返回更新数据库后影响的行数</returns>
-        public int Update<T>(T entity, T prerequisite) 
+        public int Update<T>(T entity, T prerequisite)
         {
             try
             {
