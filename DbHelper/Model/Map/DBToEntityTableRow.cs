@@ -20,18 +20,21 @@ namespace DataBaseHelper
         {
             try
             {
-                Type type = Activator.CreateInstance<T>().GetType();
-                DataTable dt = db.GetDataTable(sql, cmdType, param);
-                PropertyInfo[] proInfo = type.GetProperties();
-                foreach (var p in proInfo)
+                using (DbHelper db = new DbHelper())
                 {
-                    var fieldName = map.GetFieldAttribute(p).FieldName;
-                    if (dt.Columns.Contains(fieldName))
+                    Type type = Activator.CreateInstance<T>().GetType();
+                    DataTable dt = db.GetDataTable(sql, cmdType, param);
+                    PropertyInfo[] proInfo = type.GetProperties();
+                    foreach (var p in proInfo)
                     {
-                        dt.Columns[fieldName].ColumnName = p.Name;
+                        var fieldName = map.GetFieldAttribute(p).FieldName;
+                        if (dt.Columns.Contains(fieldName))
+                        {
+                            dt.Columns[fieldName].ColumnName = p.Name;
+                        }
                     }
-                }
-                return dt;
+                    return dt;
+                }       
             }
             catch (Exception e)
             {

@@ -2,7 +2,7 @@
 
 namespace DataBaseHelper
 {
-    public interface IOperate : IDbHelper, IMapHelper
+    public interface IOperate : IMapHelper
     {
         List<T> Query<T>();
         List<T> Query<T>(T entity);

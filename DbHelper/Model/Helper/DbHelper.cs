@@ -36,6 +36,7 @@ namespace DataBaseHelper
         {
             try
             {
+                Log.Info("打开数据库连接");
                 List<string> conStr = DbConfig.ConnectionStrings;
                 ConnectionString = conStr[0];
                 ProviderName = DbConfig.ProviderNames[0];
@@ -49,7 +50,6 @@ namespace DataBaseHelper
                     slaveConnectionStrings.AddRange(conStr);
                 }
                 CreateFactory();
-                Log.Info("打开数据库连接");
             }
             catch (Exception e)
             {
@@ -516,19 +516,35 @@ namespace DataBaseHelper
 
         public void Dispose()
         {
-            if (Connection != null)
+            if (Connection != null || SlaveConnection != null)
             {
-                if (Connection.State != ConnectionState.Closed)
+                Log.Info("关闭数据库连接");
+                if(Connection != null)
                 {
-                    if (Transaction != null)
+                    if (Connection.State != ConnectionState.Closed)
                     {
-                        IsBeginTransaction = false;
-                        Transaction.Rollback();
-                        Transaction.Dispose();
+                        if (Transaction != null)
+                        {
+                            IsBeginTransaction = false;
+                            Transaction.Rollback();
+                            Transaction.Dispose();
+                        }
+                        Connection.Close();
                     }
-                    Connection.Close();
+                    Connection.Dispose();
+                    Connection = null;
                 }
-                Connection = null;
+                else
+                {
+                    for (int i = 0; i < SlaveConnection.Count; i++)
+                    {
+                        if(SlaveConnection[i].State != ConnectionState.Closed)
+                        {
+                            SlaveConnection[i].Close();
+                            SlaveConnection[i].Dispose();
+                        }
+                    }
+                }
             }
         }
     }

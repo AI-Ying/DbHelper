@@ -10,9 +10,8 @@ using DataBaseHelper;
 
 namespace DataBaseHelper
 {
-    public class SqlClient : IDbHelper, IDisposable
+    public class SqlClient
     {
-        public DbHelper db { get { return new DbHelper(); } set { } }
         public DbEntityMap dbMap { get { return new DbEntityMap(); } set { } }
 
         private static List<DbParameter> ParamList = new List<DbParameter>();
@@ -34,10 +33,13 @@ namespace DataBaseHelper
         {
             try
             {
-                DbParameter par = db.Factory.CreateParameter();
-                par.ParameterName = $"{parString}";
-                par.Value = value;
-                ParamList.Add(par);
+                using (DbHelper db = new DbHelper())
+                {
+                    DbParameter par = db.Factory.CreateParameter();
+                    par.ParameterName = $"{parString}";
+                    par.Value = value;
+                    ParamList.Add(par);
+                }          
             }
             catch (Exception e)
             {
@@ -153,19 +155,22 @@ namespace DataBaseHelper
         {
             try
             {
-                string value = ParsesSql(sql).ToLower();
-                if (value.Equals(Sql.insert.ToString()) || value.Equals(Sql.delete.ToString()) || value.Equals(Sql.update.ToString()))
+                using (DbHelper db = new DbHelper())
                 {
-                    return db.ExecuteNonQuery(sql, cmdType, param);
-                }
-                else if(value.Equals(Sql.select.ToString()))
-                {
-                    return db.GetDataTable(sql, cmdType, param);
-                }
-                else
-                {
-                    return db.ExecuteScalar(sql, cmdType, param);
-                }
+                    string value = ParsesSql(sql).ToLower();
+                    if (value.Equals(Sql.insert.ToString()) || value.Equals(Sql.delete.ToString()) || value.Equals(Sql.update.ToString()))
+                    {
+                        return db.ExecuteNonQuery(sql, cmdType, param);
+                    }
+                    else if (value.Equals(Sql.select.ToString()))
+                    {
+                        return db.GetDataTable(sql, cmdType, param);
+                    }
+                    else
+                    {
+                        return db.ExecuteScalar(sql, cmdType, param);
+                    }
+                }      
             }
             catch (Exception e)
             {
@@ -189,14 +194,6 @@ namespace DataBaseHelper
             {
                 Log.Error("根据sql语句增、删、改、查数据库失败", e);
                 throw e;
-            }
-        }
-
-        public void Dispose()
-        {
-            if (ParamList.Count>0)
-            {
-                ParamList.Clear();
             }
         }
     }

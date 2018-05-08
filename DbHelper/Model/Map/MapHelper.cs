@@ -9,11 +9,8 @@ using DataBaseHelper;
 
 namespace DataBaseHelper
 {
-    public class MapHelper : IDbHelper
+    public class MapHelper
     {
-        public DbHelper db { get { return new DbHelper(); } set { } }
-
-
         /// <summary>
         /// 根据反射，获取实体类的特性
         /// </summary>
@@ -102,14 +99,17 @@ namespace DataBaseHelper
         {
             try
             {
-                T entity = Activator.CreateInstance<T>();
-                List<DbParameter> paramList = new List<DbParameter>();
-                var properAttribute = GetTableAttribute(entity.GetType());
-                DbParameter param = db.Factory.CreateParameter();
-                param.ParameterName = $"{properAttribute.TableName}";
-                param.Value = properAttribute.TableName;
-                paramList.Add(param);
-                return paramList.ToArray();
+                using (DbHelper db = new DbHelper())
+                { 
+                    T entity = Activator.CreateInstance<T>();
+                    List<DbParameter> paramList = new List<DbParameter>();
+                    var properAttribute = GetTableAttribute(entity.GetType());
+                    DbParameter param = db.Factory.CreateParameter();
+                    param.ParameterName = $"{properAttribute.TableName}";
+                    param.Value = properAttribute.TableName;
+                    paramList.Add(param);
+                    return paramList.ToArray();
+                }
             }
             catch(Exception e)
             {
@@ -126,21 +126,24 @@ namespace DataBaseHelper
         {
             try
             {
-                PropertyInfo[] proInfo = entity.GetType().GetProperties();
-                List<DbParameter> paramList = new List<DbParameter>();
-                foreach (var p in proInfo)
+                using (DbHelper db = new DbHelper())
                 {
-                    var properAttribute = GetFieldAttribute(p);
-                    bool isNull = object.Equals(p.GetValue(entity, null), DBNull(p.PropertyType));
-                    if (!isNull)
+                    PropertyInfo[] proInfo = entity.GetType().GetProperties();
+                    List<DbParameter> paramList = new List<DbParameter>();
+                    foreach (var p in proInfo)
                     {
-                        DbParameter param = db.Factory.CreateParameter();
-                        param.ParameterName = $"@{str}{properAttribute.FieldName}";
-                        param.Value = p.GetValue(entity);
-                        paramList.Add(param);
+                        var properAttribute = GetFieldAttribute(p);
+                        bool isNull = object.Equals(p.GetValue(entity, null), DBNull(p.PropertyType));
+                        if (!isNull)
+                        {
+                            DbParameter param = db.Factory.CreateParameter();
+                            param.ParameterName = $"@{str}{properAttribute.FieldName}";
+                            param.Value = p.GetValue(entity);
+                            paramList.Add(param);
+                        }
                     }
-                }
-                return paramList.ToArray();
+                    return paramList.ToArray();
+                }  
             }
             catch (Exception e)
             {

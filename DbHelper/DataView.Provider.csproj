@@ -56,7 +56,6 @@
     <Compile Include="Model\Client\SqlClient.cs" />
     <Compile Include="Model\Client\SqlClientFactory.cs" />
     <Compile Include="Model\Interface\IConverData.cs" />
-    <Compile Include="Model\Interface\IDbHelper.cs" />
     <Compile Include="Model\Interface\IMapHelper.cs" />
     <Compile Include="Model\Log\Log.cs" />
     <Compile Include="Model\Map\MapHelper.cs" />

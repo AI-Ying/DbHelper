@@ -2,7 +2,7 @@
 
 namespace DataBaseHelper
 {
-    interface IPageQuery : IDbHelper, IMapHelper
+    interface IPageQuery : IMapHelper
     {
         DataTable QueryWhere<T>(T entity);
         DataTable QueryNonWhere<T>();

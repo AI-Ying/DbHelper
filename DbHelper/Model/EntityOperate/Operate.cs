@@ -8,7 +8,7 @@ namespace DataBaseHelper
     public class Operate : IOperate
     {
         public MapHelper map { get { return new MapHelper(); } set { } }
-        public DbHelper db { get { return new DbHelper(); } set { } }
+        //public DbHelper db { get { return new DbHelper(); } set { } }
 
         /// <summary>
         /// 把实体类转换成相对应的sql插入语句字符串
@@ -42,12 +42,15 @@ namespace DataBaseHelper
         {
             try
             {
-                string sql = InsertSqlString(entity);
-                List<DbParameter> paramTable = map.GetTableNameParameters<T>().ToList();
-                List<DbParameter> paramValue = map.GetParameters(entity).ToList();
-                paramTable.AddRange(paramValue);
-                DbParameter[] param = paramTable.ToArray();
-                return db.ExecuteNonQuery(sql, param);
+                using (DbHelper db = new DbHelper())
+                {
+                    string sql = InsertSqlString(entity);
+                    List<DbParameter> paramTable = map.GetTableNameParameters<T>().ToList();
+                    List<DbParameter> paramValue = map.GetParameters(entity).ToList();
+                    paramTable.AddRange(paramValue);
+                    DbParameter[] param = paramTable.ToArray();
+                    return db.ExecuteNonQuery(sql, param);
+                }       
             }
             catch (Exception e)
             {
@@ -111,12 +114,15 @@ namespace DataBaseHelper
         {
             try
             {
-                string sql = DeleteSqlString(entity);
-                List<DbParameter> paramTable = map.GetTableNameParameters<T>().ToList();
-                List<DbParameter> paramWhere = map.GetParameters(entity).ToList();
-                paramTable.AddRange(paramWhere);
-                DbParameter[] param = paramTable.ToArray();
-                return db.ExecuteNonQuery(sql, param);
+                using (DbHelper db = new DbHelper())
+                {
+                    string sql = DeleteSqlString(entity);
+                    List<DbParameter> paramTable = map.GetTableNameParameters<T>().ToList();
+                    List<DbParameter> paramWhere = map.GetParameters(entity).ToList();
+                    paramTable.AddRange(paramWhere);
+                    DbParameter[] param = paramTable.ToArray();
+                    return db.ExecuteNonQuery(sql, param);
+                }        
             }
             catch (Exception e)
             {
@@ -161,7 +167,7 @@ namespace DataBaseHelper
                 paramTable.AddRange(paramWhere);
                 DbParameter[] param = paramTable.ToArray();
                 DbEntityMap entityMap = new DbEntityMap();
-                return entityMap.GetReaderList<T>(sql, param);
+                return entityMap.GetReaderList<T>(sql, param);       
             }
             catch (Exception e)
             {
@@ -202,7 +208,7 @@ namespace DataBaseHelper
                 string sql = QuerySqlStringNoWhere(entity);
                 DbParameter[] param = map.GetTableNameParameters<T>();
                 DbEntityMap entityMap = new DbEntityMap();
-                return entityMap.GetReaderList<T>(sql, param);
+                return entityMap.GetReaderList<T>(sql, param);         
             }
             catch (Exception e)
             {
@@ -244,14 +250,17 @@ namespace DataBaseHelper
         {
             try
             {
-                string sql = UpdateSqlString(entity, prerequisite);
-                List<DbParameter> paramTable = map.GetTableNameParameters<T>().ToList();
-                List<DbParameter> paramSet = map.GetParameters(entity, "New").ToList();
-                List<DbParameter> paramWhere = map.GetParameters(prerequisite).ToList();
-                paramTable.AddRange(paramSet);
-                paramTable.AddRange(paramWhere);
-                DbParameter[] param = paramTable.ToArray();
-                return db.ExecuteNonQuery(sql, param);
+                using (DbHelper db = new DbHelper())
+                {
+                    string sql = UpdateSqlString(entity, prerequisite);
+                    List<DbParameter> paramTable = map.GetTableNameParameters<T>().ToList();
+                    List<DbParameter> paramSet = map.GetParameters(entity, "New").ToList();
+                    List<DbParameter> paramWhere = map.GetParameters(prerequisite).ToList();
+                    paramTable.AddRange(paramSet);
+                    paramTable.AddRange(paramWhere);
+                    DbParameter[] param = paramTable.ToArray();
+                    return db.ExecuteNonQuery(sql, param);
+                }          
             }
             catch (Exception e)
             {

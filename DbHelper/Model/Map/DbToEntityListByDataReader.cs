@@ -6,10 +6,9 @@ using System.Reflection;
 
 namespace DataBaseHelper
 {
-    public partial class DbEntityMap : IDbHelper
+    public partial class DbEntityMap
     {
         public MapHelper map { get { return new MapHelper(); } set { } }
-        public DbHelper db { get { return new DbHelper(); } set { } }
 
         /// <summary>
         /// 根据DataReader的返回结果转化成一个实体类集合
@@ -53,8 +52,11 @@ namespace DataBaseHelper
         {
             try
             {
-                DbDataReader reader = db.ExecuteReader(sql, cmdType, param);
-                return GetReaderList<T>(reader);
+                using (DbHelper db = new DbHelper())
+                {
+                    DbDataReader reader = db.ExecuteReader(sql, cmdType, param);
+                    return GetReaderList<T>(reader);
+                }      
             }
             catch (Exception e)
             {
@@ -72,8 +74,11 @@ namespace DataBaseHelper
         {
             try
             {
-                DbDataReader reader = db.ExecuteReader(sql, CommandType.Text, param);
-                return GetReaderList<T>(reader);
+                using (DbHelper db = new DbHelper())
+                {
+                    DbDataReader reader = db.ExecuteReader(sql, CommandType.Text, param);
+                    return GetReaderList<T>(reader);
+                }          
             }
             catch (Exception e)
             {

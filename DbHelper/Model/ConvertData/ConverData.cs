@@ -3,10 +3,8 @@ using System.Data;
 
 namespace DataBaseHelper
 {
-    public class ConverDataHelper : IMapHelper, IDbHelper
+    public class ConverDataHelper : IMapHelper
     {
         public virtual MapHelper map { get { return new MapHelper(); } set { } }
-        public virtual DbHelper db { get { return new DbHelper(); } set { } }
-
     }
 }
