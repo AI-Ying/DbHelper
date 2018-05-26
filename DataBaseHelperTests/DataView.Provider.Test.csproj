@@ -71,9 +71,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DbHelper\DataBaseHelper.csproj">
+    <ProjectReference Include="..\DbHelper\DataView.Provider.csproj">
       <Project>{BCB4F57C-C0F6-41ED-97B3-019BBCC5B01C}</Project>
-      <Name>DataBaseHelper</Name>
+      <Name>DataView.Provider</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

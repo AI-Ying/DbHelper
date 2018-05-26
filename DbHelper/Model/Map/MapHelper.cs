@@ -240,10 +240,10 @@ namespace DataBaseHelper
                     bool isNull = object.Equals(p.GetValue(entity, null), DBNull(p.PropertyType));
                     if (!isNull)
                     {
-                        whereStr.Append($"{properAttribute.FieldName}=@{str}{properAttribute.FieldName} and ");
+                        whereStr.Append($"{properAttribute.FieldName}=@{str}{properAttribute.FieldName},");
                     }
                 }
-                return whereStr.ToString().Remove(whereStr.ToString().Length - 4, 4);
+                return whereStr.ToString().Remove(whereStr.ToString().Length - 1, 1);
             }
             catch (Exception e)
             {
@@ -260,7 +260,18 @@ namespace DataBaseHelper
         {
             try
             {
-                return GetSetWhereStr<T>(entity, string.Empty);
+                StringBuilder whereStr = new StringBuilder();
+                PropertyInfo[] proInfo = entity.GetType().GetProperties();
+                foreach (var p in proInfo)
+                {
+                    var properAttribute = GetFieldAttribute(p);
+                    bool isNull = object.Equals(p.GetValue(entity, null), DBNull(p.PropertyType));
+                    if (!isNull)
+                    {
+                        whereStr.Append($"{properAttribute.FieldName}=@{properAttribute.FieldName} and ");
+                    }
+                }
+                return whereStr.ToString().Remove(whereStr.ToString().Length - 4, 4);
             }
             catch (Exception e)
             {

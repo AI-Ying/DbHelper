@@ -340,6 +340,7 @@ namespace DataBaseHelper
             catch (Exception e)
             {
                 Dispose();
+                Log.Info("执行失败");
                 throw new Exception(e.Message);
             }
         }
@@ -526,7 +527,7 @@ namespace DataBaseHelper
                         if (Transaction != null)
                         {
                             IsBeginTransaction = false;
-                            Transaction.Rollback();
+                            //Transaction.Rollback();
                             Transaction.Dispose();
                         }
                         Connection.Close();

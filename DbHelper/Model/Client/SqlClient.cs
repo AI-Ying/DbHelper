@@ -10,8 +10,9 @@ using DataBaseHelper;
 
 namespace DataBaseHelper
 {
-    public class SqlClient
+    public class SqlClient : IDisposable
     {
+        public DbHelper db { get { return new DbHelper(); } set { } }
         public DbEntityMap dbMap { get { return new DbEntityMap(); } set { } }
 
         private static List<DbParameter> ParamList = new List<DbParameter>();
@@ -33,13 +34,10 @@ namespace DataBaseHelper
         {
             try
             {
-                using (DbHelper db = new DbHelper())
-                {
-                    DbParameter par = db.Factory.CreateParameter();
-                    par.ParameterName = $"{parString}";
-                    par.Value = value;
-                    ParamList.Add(par);
-                }          
+                DbParameter par = db.Factory.CreateParameter();
+                par.ParameterName = $"{parString}";
+                par.Value = value;
+                ParamList.Add(par);
             }
             catch (Exception e)
             {
@@ -59,13 +57,20 @@ namespace DataBaseHelper
                 string pattern = "^(insert|delete|update|select)";
                 RegexOptions option = RegexOptions.Compiled | RegexOptions.IgnoreCase;
                 MatchCollection coll = Regex.Matches(sqlStr, pattern, option);
-                 return coll[0].Value;  
+                return coll[0].Value;
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
+
+
+
+
+
+
+
         /// <summary>
         /// 根据sql语句查询数据库转成实体集合
         /// </summary>
@@ -78,7 +83,8 @@ namespace DataBaseHelper
         {
             try
             {
-                return dbMap.GetReaderList<T>(sql, cmdType, param);
+                DbDataReader reader = db.ExecuteReader(sql, cmdType, param);
+                return dbMap.GetReaderList<T>(reader);
             }
             catch (Exception e)
             {
@@ -155,28 +161,25 @@ namespace DataBaseHelper
         {
             try
             {
-                using (DbHelper db = new DbHelper())
+                string value = ParsesSql(sql).ToLower();
+                if (value.Equals(Sql.insert.ToString()) || value.Equals(Sql.delete.ToString()) || value.Equals(Sql.update.ToString()))
                 {
-                    string value = ParsesSql(sql).ToLower();
-                    if (value.Equals(Sql.insert.ToString()) || value.Equals(Sql.delete.ToString()) || value.Equals(Sql.update.ToString()))
-                    {
-                        return db.ExecuteNonQuery(sql, cmdType, param);
-                    }
-                    else if (value.Equals(Sql.select.ToString()))
-                    {
-                        return db.GetDataTable(sql, cmdType, param);
-                    }
-                    else
-                    {
-                        return db.ExecuteScalar(sql, cmdType, param);
-                    }
-                }      
+                    return db.ExecuteNonQuery(sql, cmdType, param);
+                }
+                else if (value.Equals(Sql.select.ToString()))
+                {
+                    return db.GetDataTable(sql, cmdType, param);
+                }
+                else
+                {
+                    return db.ExecuteScalar(sql, cmdType, param);
+                }
             }
             catch (Exception e)
             {
                 Log.Error("根据sql语句增、删、改、查数据库失败", e);
                 throw e;
-            }  
+            }
         }
         /// <summary>
         /// 根据sql语句增、删、改、查数据库
@@ -194,6 +197,18 @@ namespace DataBaseHelper
             {
                 Log.Error("根据sql语句增、删、改、查数据库失败", e);
                 throw e;
+            }
+        }
+
+        public void Dispose()
+        {
+            if (db != null)
+            {
+                if (ParamList.Count > 0)
+                {
+                    ParamList.Clear();
+                }
+                db.Dispose();
             }
         }
     }

@@ -9,7 +9,6 @@ namespace DataBaseHelper
     public class PageQuyeyMaxTop : IPageQuery
     {
         public MapHelper map { get { return new MapHelper(); } set { } }
-        public DbHelper db { get { return new DbHelper(); } set { } }
         public DbEntityMap tableMap { get { return new DbEntityMap(); } set { } }
         /// <summary>
         /// 分页查询所需的主键
@@ -42,7 +41,7 @@ namespace DataBaseHelper
                     string sql = $"select count(*) from {tableName} where {where};";
                     int count = Convert.ToInt32(db.ExecuteScalar(sql, param));
                     return count;
-                }   
+                }
             }
             catch (Exception e)
             {
@@ -59,34 +58,29 @@ namespace DataBaseHelper
         {
             try
             {
-                using (DbHelper db = new DbHelper())
+                string tableName = map.GetTableName(entity.GetType());
+                string where = map.GetSetWhereStr(entity);
+                List<DbParameter> paramTable = map.GetTableNameParameters<T>().ToList();
+                List<DbParameter> paramWhere = map.GetParameters(entity).ToList();
+                paramTable.AddRange(paramWhere);
+                DbParameter[] param = paramTable.ToArray();
+                string sql = string.Empty;
+                int dataCount = GetDataCount(tableName, param, where);
+                if (dataCount > PageSize)
                 {
-                    string tableName = map.GetTableName(entity.GetType());
-                    string where = map.GetSetWhereStr(entity);
-                    List<DbParameter> paramTable = map.GetTableNameParameters<T>().ToList();
-                    List<DbParameter> paramWhere = map.GetParameters(entity).ToList();
-                    paramTable.AddRange(paramWhere);
-                    DbParameter[] param = paramTable.ToArray();
-                    string sql = string.Empty;
-                    int dataCount = GetDataCount(tableName, param, where);
-                    if (dataCount > PageSize)
-                    {
-                        sql = $"select top {PageSize} * from {tableName} where {where} and {PrimaryKey} > (select max({PrimaryKey}) from ( select top {PageIndex} {PrimaryKey} from  {tableName} order by {PrimaryKey} ) as t ) order by {PrimaryKey};";
-                    }
-                    else if (0 < dataCount && dataCount <= PageSize)
-                    {
-                        sql = $"select top {PageSize} * from {tableName} where {where} order by {PrimaryKey};";
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                    db.BeginTransaction();
-                    DataTable dt = tableMap.GetDataTable<T>(sql, param);
-                    db.CommitTransaction();
-                    return dt;
+                    sql = $"select top {PageSize} * from {tableName} where {where} and {PrimaryKey} > (select max({PrimaryKey}) from ( select top {PageIndex} {PrimaryKey} from  {tableName} order by {PrimaryKey} ) as t ) order by {PrimaryKey};";
                 }
-            }    
+                else if (0 < dataCount && dataCount <= PageSize)
+                {
+                    sql = $"select top {PageSize} * from {tableName} where {where} order by {PrimaryKey};";
+                }
+                else
+                {
+                    return null;
+                }
+                DataTable dt = tableMap.GetDataTable<T>(sql, param);
+                return dt;
+            }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
@@ -131,7 +125,7 @@ namespace DataBaseHelper
                     string sql = $"Select count(*) from {tableName};";
                     int count = Convert.ToInt32(db.ExecuteScalar(sql, param));
                     return count;
-                }   
+                }
             }
             catch (Exception e)
             {
@@ -147,30 +141,25 @@ namespace DataBaseHelper
         {
             try
             {
-                using (DbHelper db = new DbHelper())
+                T entity = Activator.CreateInstance<T>();
+                string tableName = map.GetTableName(entity.GetType());
+                DbParameter[] param = map.GetTableNameParameters<T>();
+                string sql = string.Empty;
+                int dataCount = GetDataCount(tableName, param);
+                if (dataCount > PageSize)
                 {
-                    T entity = Activator.CreateInstance<T>();
-                    string tableName = map.GetTableName(entity.GetType());
-                    DbParameter[] param = map.GetTableNameParameters<T>();
-                    string sql = string.Empty;
-                    int dataCount = GetDataCount(tableName, param);
-                    if (dataCount > PageSize)
-                    {
-                        sql = $"select top {PageSize} * from {tableName} where {PrimaryKey} > (select max({PrimaryKey}) from ( select top {PageIndex} {PrimaryKey} from  {tableName} order by {PrimaryKey} ) as t ) order by {PrimaryKey};";
-                    }
-                    else if (0 < dataCount && dataCount <= PageSize)
-                    {
-                        sql = $"select top {PageSize} * from {tableName} order by {PrimaryKey};";
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                    db.BeginTransaction();
-                    DataTable dt = tableMap.GetDataTable<T>(sql, param);
-                    db.CommitTransaction();
-                    return dt;
-                } 
+                    sql = $"select top {PageSize} * from {tableName} where {PrimaryKey} > (select max({PrimaryKey}) from ( select top {PageIndex} {PrimaryKey} from  {tableName} order by {PrimaryKey} ) as t ) order by {PrimaryKey};";
+                }
+                else if (0 < dataCount && dataCount <= PageSize)
+                {
+                    sql = $"select top {PageSize} * from {tableName} order by {PrimaryKey};";
+                }
+                else
+                {
+                    return null;
+                }
+                DataTable dt = tableMap.GetDataTable<T>(sql, param);
+                return dt;
             }
             catch (Exception e)
             {
@@ -182,7 +171,7 @@ namespace DataBaseHelper
         /// </summary>
         /// <typeparam name="T">泛型实体</typeparam>
         /// <returns>返回一个DataTable</returns>
-        public DataTable QueryNonWhere<T>() 
+        public DataTable QueryNonWhere<T>()
         {
             try
             {

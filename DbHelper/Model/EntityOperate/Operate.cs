@@ -131,6 +131,31 @@ namespace DataBaseHelper
             }
         }
         /// <summary>
+        /// 从数据库中批量删除一个实体列表
+        /// </summary>
+        /// <typeparam name="T">实体泛型</typeparam>
+        /// <param name="list">实体集合</param>
+        /// <returns>返回删除数据成功的行数</returns>
+        public int DeleteRange<T>(List<T> list) where T : class
+        {
+            try
+            {
+                int sum = 0;
+                foreach (var item in list)
+                {
+                    T entity = item as T;
+                    int result = Delete(entity);
+                    sum += result;
+                }
+                return sum;
+            }
+            catch (Exception e)
+            {
+                Log.Error("批量添加实体信息失败", e);
+                throw e;
+            }
+        }
+        /// <summary>
         /// 把实体转换成相对应的sql查询语句字符串
         /// </summary>
         /// <typeparam name="T">实体泛型</typeparam>

@@ -37,6 +37,7 @@ namespace DataBaseHelper
             }
             catch (Exception e)
             {
+                Log.Info("转成实体失败！！！！！！");
                 throw new Exception(e.Message);
             }
         }
